@@ -1,0 +1,101 @@
+/**
+ * Per-brand theming. The Layout sets `data-brand="<id>"` on `.app-shell`; each
+ * block below overrides the accent tokens so the whole section (including the
+ * always-dark navbar/footer via --on-ink-accent) adopts that program's color.
+ *
+ * Neutral tokens (bg/text/border) stay global in index.css, so light/dark keeps
+ * working everywhere; only the accent changes per brand. Each brand defines a
+ * light value here plus a dark value in the media query at the bottom.
+ *
+ * Ordered to match the org chart. Keep ids in sync with config/brands.tsx.
+ */
+
+/* ---- Light-mode accents ------------------------------------------------- */
+
+/* ABC Centro Familiar Integral — Índigo */
+[data-brand='centro'] {
+  --accent: #4f46e5;
+  --accent-bg: rgba(79, 70, 229, 0.1);
+  --accent-border: rgba(79, 70, 229, 0.5);
+  --on-ink-accent: #818cf8;
+}
+
+/* ABC Brilliant Brains — Ámbar */
+[data-brand='brilliant-brains'] {
+  --accent: #d97706;
+  --accent-bg: rgba(217, 119, 6, 0.1);
+  --accent-border: rgba(217, 119, 6, 0.5);
+  --on-ink-accent: #fbbf24;
+}
+
+/* ABC Mental Care — Verde azulado */
+[data-brand='mental-care'] {
+  --accent: #0d9488;
+  --accent-bg: rgba(13, 148, 136, 0.1);
+  --accent-border: rgba(13, 148, 136, 0.5);
+  --on-ink-accent: #2dd4bf;
+}
+
+/* ABC Foundation — Violeta */
+[data-brand='foundation'] {
+  --accent: #7c3aed;
+  --accent-bg: rgba(124, 58, 237, 0.1);
+  --accent-border: rgba(124, 58, 237, 0.5);
+  --on-ink-accent: #a78bfa;
+}
+
+/* Más Que Atletas PR — Verde (soccer green, unchanged from its original site) */
+[data-brand='mas-que-atletas'] {
+  --accent: #15803d;
+  --accent-bg: rgba(21, 128, 61, 0.1);
+  --accent-border: rgba(21, 128, 61, 0.5);
+  --on-ink-accent: #4ade80;
+}
+
+/* ABC Ocean Care — Azul océano */
+[data-brand='ocean-care'] {
+  --accent: #0284c7;
+  --accent-bg: rgba(2, 132, 199, 0.1);
+  --accent-border: rgba(2, 132, 199, 0.5);
+  --on-ink-accent: #38bdf8;
+}
+
+/* ---- Dark-mode accents -------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  [data-brand='centro'] {
+    --accent: #818cf8;
+    --accent-bg: rgba(129, 140, 248, 0.15);
+    --accent-border: rgba(129, 140, 248, 0.5);
+  }
+
+  [data-brand='brilliant-brains'] {
+    --accent: #fbbf24;
+    --accent-bg: rgba(251, 191, 36, 0.15);
+    --accent-border: rgba(251, 191, 36, 0.5);
+  }
+
+  [data-brand='mental-care'] {
+    --accent: #2dd4bf;
+    --accent-bg: rgba(45, 212, 191, 0.15);
+    --accent-border: rgba(45, 212, 191, 0.5);
+  }
+
+  [data-brand='foundation'] {
+    --accent: #a78bfa;
+    --accent-bg: rgba(167, 139, 250, 0.15);
+    --accent-border: rgba(167, 139, 250, 0.5);
+  }
+
+  [data-brand='mas-que-atletas'] {
+    --accent: #4ade80;
+    --accent-bg: rgba(74, 222, 128, 0.15);
+    --accent-border: rgba(74, 222, 128, 0.5);
+  }
+
+  [data-brand='ocean-care'] {
+    --accent: #38bdf8;
+    --accent-bg: rgba(56, 189, 248, 0.15);
+    --accent-border: rgba(56, 189, 248, 0.5);
+  }
+}

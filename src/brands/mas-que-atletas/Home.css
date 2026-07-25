@@ -1,0 +1,164 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Full-screen hero ---------- */
+.home-hero {
+  position: relative;
+  width: 100%;
+  min-height: 90svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.home-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+}
+
+/* Keep the hero photo area clean: hide the placeholder marker behind the
+   overlaid headline (the about/gallery placeholders still show theirs). */
+.home-hero .placeholder-image-icon,
+.home-hero .placeholder-image-label {
+  display: none;
+}
+
+.home-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.home-hero-content h1 {
+  color: #fff;
+  font-size: 72px;
+  line-height: 1.05;
+  margin: 0;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
+}
+
+.home-hero-sub {
+  font-size: 21px;
+  line-height: 1.5;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.home-hero-tagline {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--on-ink-accent);
+  padding: 11px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+/* ---------- About (two-column editorial split) ---------- */
+.home-about {
+  padding: 80px 0;
+}
+
+.home-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.home-about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.home-tagline {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--accent);
+}
+
+/* ---------- Features band ---------- */
+.home-features {
+  width: 100%;
+  background: var(--code-bg);
+  padding: 72px 0;
+}
+
+.home-features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+/* ---------- Shared section heading w/ green underline ---------- */
+.section-heading {
+  margin: 0;
+}
+
+.section-heading::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin-top: 16px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+@media (max-width: 1024px) {
+  .home-hero-content h1 {
+    font-size: 44px;
+  }
+
+  .home-hero-sub {
+    font-size: 18px;
+  }
+
+  .home-about {
+    padding: 56px 0;
+  }
+
+  .home-about-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .home-about-text {
+    text-align: center;
+    align-items: center;
+  }
+
+  .section-heading::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-features {
+    padding: 56px 0;
+  }
+
+  .home-features-grid {
+    flex-direction: column;
+  }
+}
