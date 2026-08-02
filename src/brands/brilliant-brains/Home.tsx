@@ -1,8 +1,13 @@
-import BrandLanding from '../../components/BrandLanding'
-import { brands } from '../../config/brands'
+import HeroSection from './HeroSection'
+import ServicesCarousel from './ServicesCarousel'
 
 function BrilliantBrainsHome() {
-  return <BrandLanding brand={brands['brilliant-brains']} />
+  return (
+    <>
+      <HeroSection />
+      <ServicesCarousel />
+    </>
+  )
 }
 
 export default BrilliantBrainsHome

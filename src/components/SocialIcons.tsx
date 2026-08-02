@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react'
+import type { BrandSocial } from '../config/brands'
 
 function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -30,18 +31,28 @@ type SocialLink = {
   Icon: (props: SVGProps<SVGSVGElement>) => React.JSX.Element
 }
 
-const socialLinks: SocialLink[] = [
-  { label: 'Facebook', href: '#', Icon: FacebookIcon },
-  { label: 'Instagram', href: '#', Icon: InstagramIcon },
-  { label: 'Twitter / X', href: '#', Icon: XIcon },
-]
+type SocialIconsProps = {
+  /**
+   * Real profile URLs for the active brand (see `Brand.social`). Any platform
+   * left out renders the placeholder href="#", as every brand did before real
+   * accounts started arriving.
+   */
+  social?: BrandSocial
+}
 
-function SocialIcons() {
+function SocialIcons({ social }: SocialIconsProps) {
+  // TODO: replace the remaining href="#" entries as each program's real
+  // accounts are provided.
+  const socialLinks: SocialLink[] = [
+    { label: 'Facebook', href: social?.facebook ?? '#', Icon: FacebookIcon },
+    { label: 'Instagram', href: social?.instagram ?? '#', Icon: InstagramIcon },
+    { label: 'Twitter / X', href: social?.twitter ?? '#', Icon: XIcon },
+  ]
+
   return (
     <ul className="social-icons">
       {socialLinks.map(({ label, href, Icon }) => (
         <li key={label}>
-          {/* TODO: replace href="#" with the real social media URL */}
           <a href={href} aria-label={label} target="_blank" rel="noreferrer">
             <Icon className="social-icon" />
           </a>

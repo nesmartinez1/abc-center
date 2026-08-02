@@ -1,0 +1,32 @@
+/**
+ * Tailwind, confined to the ABC Brilliant Brains program.
+ *
+ * BB was ported in from a standalone repo built entirely with Tailwind utility
+ * classes. The rest of this site (the shell + every other brand) uses plain
+ * per-component CSS with the design tokens in index.css. This file is the seam
+ * between the two, and each line below exists to keep Tailwind from leaking:
+ *
+ * 1. NO PREFLIGHT. `tailwindcss/preflight.css` is intentionally not imported —
+ *    it is a global reset and would restyle MQA and every other page. The
+ *    equivalent, scoped to `.bb-scope`, lives in brands/brilliant-brains/reset.css.
+ *
+ * 2. UTILITIES ARE UNLAYERED. index.css is unlayered, and unlayered CSS beats
+ *    anything in an @layer. If utilities went in `layer(utilities)` as the
+ *    Tailwind docs show, `index.css`'s `h1 { font-size: 56px }` would win over
+ *    `.text-5xl` and BB's typography would collapse. Unlayered, the utility
+ *    (0,1,0) correctly beats the element selector (0,0,1).
+ *
+ * 3. SOURCE SCANNING IS RESTRICTED to brands/brilliant-brains. Not cosmetic:
+ *    index.css defines a site-wide `.container` class, and Tailwind v4 emits its
+ *    own `.container` utility if it sees that string anywhere in the scanned
+ *    sources — which would override `max-width: 1200px` on every page of the
+ *    site. `source(none)` + an explicit `@source` keeps that from happening.
+ *
+ * Import order in main.tsx (index.css, then this file) is also load-bearing.
+ */
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import './brands/brilliant-brains/reset.css';
+@import 'tailwindcss/utilities.css' source(none);
+
+@source './brands/brilliant-brains';

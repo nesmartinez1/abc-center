@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# env files — .env.example is committed, real credentials are not
+.env
+.env.*
+!.env.example
+.vercel
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

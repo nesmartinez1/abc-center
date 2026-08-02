@@ -26,6 +26,13 @@ export type BrandPage = {
   end?: boolean
 }
 
+/** Real social-media profiles for a brand. Omitted keys fall back to a stub. */
+export type BrandSocial = {
+  facebook?: string
+  instagram?: string
+  twitter?: string
+}
+
 export type Brand = {
   id: BrandId
   /** Full display name, e.g. "ABC Brilliant Brains". */
@@ -47,6 +54,8 @@ export type Brand = {
   live: boolean
   /** Optional contextual sub-nav rendered when inside this brand. */
   pages?: BrandPage[]
+  /** Real social profiles, if the program has them. */
+  social?: BrandSocial
 }
 
 export const brands: Record<BrandId, Brand> = {
@@ -66,11 +75,24 @@ export const brands: Record<BrandId, Brand> = {
     name: 'ABC Brilliant Brains',
     menuLabel: 'ABC Brilliant Brains',
     path: '/brilliant-brains',
-    tagline: 'Despertando el potencial de cada mente.',
+    tagline:
+      'Tutorías personalizadas que transforman el aprendizaje en una aventura emocionante.',
     blurb:
-      'Programa educativo enfocado en el desarrollo cognitivo, la creatividad y el amor por el aprendizaje en niños y jóvenes.',
+      'Programa educativo enfocado en el desarrollo cognitivo, la creatividad y el amor por el aprendizaje en niños y jóvenes: tutorías individualizadas, programa grupal, asistencia de homeschooling y actividades extracurriculares.',
     accentName: 'Ámbar',
-    live: false,
+    live: true,
+    pages: [
+      { label: 'Inicio', to: '/brilliant-brains', end: true },
+      { label: 'Servicios', to: '/brilliant-brains/servicios' },
+      { label: 'Talleres', to: '/brilliant-brains/talleres' },
+      { label: 'Nosotros', to: '/brilliant-brains/nosotros' },
+      { label: 'Contacto', to: '/brilliant-brains/contacto' },
+    ],
+    social: {
+      facebook: 'https://www.facebook.com/share/1AFNu8LayJ/?mibextid=wwXIfr',
+      instagram:
+        'https://www.instagram.com/abcbrilliantbrains?igsh=ZXlrd3hkb3lwamF6&utm_source=qr',
+    },
   },
   'mental-care': {
     id: 'mental-care',

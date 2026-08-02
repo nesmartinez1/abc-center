@@ -2,15 +2,24 @@ import { Route, Routes } from 'react-router-dom'
 import Layout from './components/layout/Layout'
 
 import CentroHome from './brands/centro/Home'
-import BrilliantBrainsHome from './brands/brilliant-brains/Home'
 import MentalCareHome from './brands/mental-care/Home'
 import FoundationHome from './brands/foundation/Home'
 import OceanCareHome from './brands/ocean-care/Home'
 
-// Más Que Atletas PR — the one fully-built program (its own bespoke pages).
+// Más Que Atletas PR — fully built, ported from the standalone MQA repo.
 import MqaHome from './brands/mas-que-atletas/Home'
 import MqaSports from './brands/mas-que-atletas/Sports'
 import MqaNews from './brands/mas-que-atletas/News'
+
+// ABC Brilliant Brains — fully built, ported from the standalone
+// abc_brilliant_brains repo. Its own layout route supplies the `.bb-scope`
+// wrapper that confines Tailwind to this subtree.
+import BrilliantBrainsLayout from './brands/brilliant-brains/Layout'
+import BrilliantBrainsHome from './brands/brilliant-brains/Home'
+import BrilliantBrainsServices from './brands/brilliant-brains/Services'
+import BrilliantBrainsWorkshops from './brands/brilliant-brains/Workshops'
+import BrilliantBrainsAbout from './brands/brilliant-brains/About'
+import BrilliantBrainsContact from './brands/brilliant-brains/Contact'
 
 function App() {
   return (
@@ -19,8 +28,16 @@ function App() {
         {/* Umbrella */}
         <Route index element={<CentroHome />} />
 
+        {/* ABC Brilliant Brains (live) */}
+        <Route path="brilliant-brains" element={<BrilliantBrainsLayout />}>
+          <Route index element={<BrilliantBrainsHome />} />
+          <Route path="servicios" element={<BrilliantBrainsServices />} />
+          <Route path="talleres" element={<BrilliantBrainsWorkshops />} />
+          <Route path="nosotros" element={<BrilliantBrainsAbout />} />
+          <Route path="contacto" element={<BrilliantBrainsContact />} />
+        </Route>
+
         {/* Top-level programs (prototypes) */}
-        <Route path="brilliant-brains" element={<BrilliantBrainsHome />} />
         <Route path="mental-care" element={<MentalCareHome />} />
 
         {/* Foundation + its initiatives */}

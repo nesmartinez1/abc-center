@@ -25,7 +25,15 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
+  /* Root font-size stays at the browser default 16px so that `rem` means 16px.
+     Tailwind's entire scale is authored in rem and is only used by the
+     Brilliant Brains program, which was built against a 16px root — bumping
+     this to 18px silently inflated every BB size by 12.5% and overflowed its
+     fixed-height layouts. The site's own 18px body text is applied on
+     .app-shell instead; none of this project's CSS uses rem/em, so nothing
+     else is affected. */
+  font-size: 16px;
+  font-family: var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -34,10 +42,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -69,6 +73,14 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+
+  /* Site-wide body type. Lives here rather than on :root so the root stays at
+     16px for rem — see the note in the :root block above. */
+  font: 18px/145% var(--sans);
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
 }
 
 body {

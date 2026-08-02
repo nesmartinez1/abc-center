@@ -15,7 +15,7 @@ function Footer({ activeBrand }: FooterProps) {
       {!isCentro && (
         <p className="footer-parent">Parte de ABC Centro Familiar Integral</p>
       )}
-      <SocialIcons />
+      <SocialIcons social={activeBrand.social} />
       <p className="footer-copy">
         COPYRIGHT @2026, ABC Centro Familiar Integral
       </p>

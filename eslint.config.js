@@ -6,7 +6,9 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // api/ holds plain-JS serverless handlers that run on the host (Node), not in
+  // the browser bundle — outside both this config's ts/tsx scope and tsconfig's.
+  globalIgnores(['dist', 'api']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

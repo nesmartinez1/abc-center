@@ -1,0 +1,116 @@
+/**
+ * Tailwind Preflight, scoped to the Brilliant Brains subtree.
+ *
+ * The site-wide Tailwind setup (src/brilliant-brains.css) deliberately does NOT
+ * load `tailwindcss/preflight.css`, because that reset is global and would
+ * change how every other brand renders. This file re-creates the parts of
+ * Preflight that BB's markup depends on, confined to `.bb-scope`.
+ *
+ * Specificity is load-bearing. Every rule is written as
+ * `.bb-scope :where(...)`, which is (0,1,0) — exactly the same as a Tailwind
+ * utility class. Ties are broken by source order, and brilliant-brains.css
+ * imports this file BEFORE the utilities, so utilities always win. Meanwhile
+ * (0,1,0) still beats the unlayered element selectors in index.css
+ * (`h1 { font-size: 56px }`, `p { margin: 0 }`), which are (0,0,1).
+ *
+ * Do not "simplify" these to plain `h1 { ... }` — that flips both comparisons.
+ */
+
+.bb-scope {
+  /* BB is designed light-only (bg-white cards, text-gray-*). Opt the subtree
+     out of the site-wide prefers-color-scheme: dark handling. */
+  color-scheme: light;
+
+  /* index.css sets 18px/145% + letter-spacing on :root; BB was built against
+     the browser default plus Tailwind's font stack. Restore that baseline. */
+  font: 16px / 1.5 ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: normal;
+  color: #000;
+  text-align: left;
+}
+
+.bb-scope,
+.bb-scope :where(*),
+.bb-scope :where(*)::before,
+.bb-scope :where(*)::after {
+  box-sizing: border-box;
+  border: 0 solid;
+}
+
+.bb-scope :where(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+.bb-scope :where(p, figure, blockquote, dl, dd, pre) {
+  margin: 0;
+}
+
+.bb-scope :where(ul, ol, menu) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bb-scope :where(a) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.bb-scope :where(b, strong) {
+  font-weight: bolder;
+}
+
+.bb-scope :where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+  vertical-align: middle;
+}
+
+.bb-scope :where(img, video) {
+  max-width: 100%;
+  height: auto;
+}
+
+.bb-scope :where(button, input, optgroup, select, textarea) {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  background-color: transparent;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+}
+
+.bb-scope :where(button, [type='button'], [type='submit'], [type='reset']) {
+  appearance: button;
+  cursor: pointer;
+}
+
+.bb-scope :where(button:disabled, [type='button']:disabled) {
+  cursor: default;
+}
+
+.bb-scope :where(textarea) {
+  resize: vertical;
+}
+
+.bb-scope :where(::placeholder) {
+  opacity: 1;
+  color: color-mix(in oklab, currentcolor 50%, transparent);
+}
+
+.bb-scope :where(table) {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+.bb-scope :where(hr) {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
+  margin: 0;
+}

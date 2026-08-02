@@ -1,0 +1,69 @@
+.custom {
+    display: flex;
+    height: 40vh;
+    background-image: url('/brilliant-brains/images/about_cover.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 250px;
+    position: relative;
+    justify-content: center;
+    align-items: center; 
+}
+
+.custom::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.custom h1 {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    z-index: 2;
+    color: white;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, red 0%, blue 50%, yellow 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@media (min-width: 640px) {
+    .custom {
+        height: 50vh;
+        min-height: 300px;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .custom h1 {
+        bottom: 70px;
+        left: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .custom {
+        height: 60vh;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+    
+    .custom h1 {
+        bottom: 100px;
+        left: 70px;
+    }
+}

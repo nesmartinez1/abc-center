@@ -1,0 +1,86 @@
+.custom {
+    display: flex;
+    height: 40vh;
+    background-image: url('/brilliant-brains/images/cover1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 250px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.custom h1 {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    z-index: 2;
+    color: white;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, red 0%, blue 50%, yellow 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.formCard {
+    background: #ffffff;
+    border-top: 4px solid #3B82F6;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.06);
+}
+
+.success {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity:0; transform: translateY(4px);}
+    to { opacity:1; transform: translateY(0);}
+}
+
+@media (min-width: 640px) {
+    .custom {
+        height: 50vh;
+        min-height: 300px;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .custom h1 {
+        bottom: 70px;
+        left: 60px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .custom {
+        height: 60vh;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+    
+    .custom h1 {
+        bottom: 100px;
+        left: 70px;
+    }
+}
