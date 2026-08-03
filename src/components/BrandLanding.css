@@ -1,74 +1,9 @@
+/* Hero styles now live in PageHero.css; the accent-underlined heading now lives
+   in Section.css as `.section-title`. What remains is specific to this template. */
+
 .brand-landing {
   display: flex;
   flex-direction: column;
-}
-
-/* ---------- Hero ---------- */
-.brand-hero {
-  position: relative;
-  width: 100%;
-  min-height: 70svh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.brand-hero-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    rgba(0, 0, 0, 0.78) 100%
-  );
-}
-
-.brand-hero .placeholder-image-icon,
-.brand-hero .placeholder-image-label {
-  display: none;
-}
-
-.brand-hero-content {
-  position: relative;
-  z-index: 1;
-  max-width: 920px;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  text-align: center;
-  color: #fff;
-}
-
-.brand-hero-content h1 {
-  color: #fff;
-  font-size: 60px;
-  line-height: 1.08;
-  margin: 0;
-  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
-}
-
-.brand-hero-tagline {
-  font-size: 20px;
-  line-height: 1.5;
-  max-width: 640px;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.brand-hero-badge {
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: var(--on-ink-accent);
-  padding: 8px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(4px);
 }
 
 /* ---------- About ---------- */
@@ -97,59 +32,7 @@
   margin-top: 24px;
 }
 
-/* ---------- Shared heading with accent underline ---------- */
-.brand-section-heading {
-  margin: 0;
-}
-
-.brand-section-heading::after {
-  content: '';
-  display: block;
-  width: 56px;
-  height: 4px;
-  margin-top: 16px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-/* ---------- CTA (real link, unlike MQA's static span) ---------- */
-.brand-landing-cta {
-  align-self: flex-start;
-  margin-top: 4px;
-  padding: 10px 18px;
-  border-radius: 6px;
-  border: 1px solid var(--accent-border);
-  background: var(--accent-bg);
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.brand-landing-cta:hover {
-  background: var(--accent);
-  color: var(--ink-text);
-}
-
-.brand-landing-cta--muted {
-  border-color: var(--border);
-  background: var(--code-bg);
-  color: var(--text);
-  cursor: default;
-}
-
-.brand-landing-cta--muted:hover {
-  background: var(--code-bg);
-  color: var(--text);
-}
-
 @media (max-width: 1024px) {
-  .brand-hero-content h1 {
-    font-size: 40px;
-  }
-
   .brand-about {
     padding: 48px 0 8px;
   }

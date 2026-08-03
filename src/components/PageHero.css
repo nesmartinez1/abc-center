@@ -1,0 +1,130 @@
+/* Rules moved verbatim from BrandLanding.css (.brand-hero*) so existing pages
+   render identically; only the class prefix changed. */
+
+.page-hero {
+  position: relative;
+  width: 100%;
+  min-height: 70svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Sub-pages get a shorter header — a full viewport per page reads as six
+   separate landing pages rather than one program. */
+.page-hero--compact {
+  min-height: 42svh;
+}
+
+.page-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+}
+
+.page-hero .placeholder-image-icon,
+.page-hero .placeholder-image-label {
+  display: none;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 920px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.page-hero-content h1 {
+  color: #fff;
+  font-size: 60px;
+  line-height: 1.08;
+  margin: 0;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
+}
+
+.page-hero--compact .page-hero-content h1 {
+  font-size: 44px;
+}
+
+.page-hero-tagline {
+  font-size: 20px;
+  line-height: 1.5;
+  max-width: 640px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.page-hero-badge {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--on-ink-accent);
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(4px);
+}
+
+/* Hero call-to-action buttons */
+.page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.page-hero-cta {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.page-hero-cta--primary {
+  background: var(--on-ink-accent);
+  color: var(--ink);
+}
+
+.page-hero-cta--primary:hover {
+  background: #fff;
+}
+
+.page-hero-cta--secondary {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.page-hero-cta--secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 1024px) {
+  .page-hero-content h1 {
+    font-size: 40px;
+  }
+
+  .page-hero--compact .page-hero-content h1 {
+    font-size: 32px;
+  }
+}

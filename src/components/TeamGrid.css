@@ -1,0 +1,79 @@
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.team-card .placeholder-image {
+  border-radius: 0;
+}
+
+.team-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+}
+
+.team-card-body h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.team-role {
+  font-size: 15px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.team-license {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.team-specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-specialties li {
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.team-bio {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.team-card--empty .team-card-body h3,
+.team-card--empty .team-role {
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -9,17 +9,27 @@ handlers in `api/` (see "Contact forms" below) — no CMS, no auth.
 
 - **ABC Centro Familiar Integral** — umbrella / home (`/`)
   - **ABC Brilliant Brains** (`/brilliant-brains`) — **LIVE / fully built**
-  - **ABC Mental Care** (`/mental-care`) — prototype
-  - **ABC Foundation** (`/fundacion`) — prototype
+  - **ABC Mental Care** (`/mental-care`) — real copy, 5 pages, `live: false`
+  - **ABC Foundation** (`/fundacion`) — real copy, 5 pages, `live: false`
     - **Más Que Atletas PR** (`/fundacion/mas-que-atletas`) — **LIVE / fully built**
-    - **ABC Ocean Care** (`/fundacion/ocean-care`) — prototype
+    - **ABC Ocean Care** (`/fundacion/ocean-care`) — real copy, 4 pages, `live: false`
+    - **ABC Nutrition** (`/fundacion/abc-nutrition`) — announced only, prototype
 
-Two programs have real content, each ported in from its own standalone repo:
+Two programs are fully finished, each ported in from its own standalone repo:
 **Más Que Atletas PR** (from `../mas-que-atletas-pr`) and **ABC Brilliant Brains**
 (from `../abc_brilliant_brains`). Both source repos are left untouched as backups.
-Every other section is a themed **prototype** built from the reusable
-`BrandLanding` template with placeholder copy — enough to visualize the structure
-until real content arrives.
+
+**Centro, Mental Care, Foundation and Ocean Care now carry ABC's real copy** —
+mission, vision, values, service lists, page structures — taken from the client's
+questionnaire answers. They are still `live: false` because no photos, logos,
+brand colours or contact details have been supplied: every image is a
+`PlaceholderImage`, so the "Vista previa" badge stays until those arrive.
+
+**ABC Nutrition** was announced with nothing but a name and uses the generic
+`BrandLanding` prototype template.
+
+`projects/abc-content-outstanding.md` is the running punch list of what ABC still
+owes.
 
 ## Tech stack
 
@@ -81,6 +91,65 @@ Paths mirror the org chart (MQA lives under `/fundacion/mas-que-atletas`).
   violet · MQA green (unchanged) · Ocean Care blue. **Placeholders — swap for real
   ABC brand colors when they arrive.**
 
+### Page copy lives in `src/content/`, and empty sections disappear
+
+**All client-written copy lives in `src/content/<brand>.ts` as plain data — never
+inline in a component.** Page components map over those arrays, and a section
+whose array is empty **renders nothing at all**.
+
+This is deliberate, not incidental. ABC approved six homepage sections
+(estadísticas, testimonios, galería, eventos, FAQ, aliados) and supplied content
+for none of them. Wiring them to empty arrays means the structure exists, the
+page never shows an empty shell, and filling one in later is a data edit with
+zero component work.
+
+Two consequences worth knowing:
+
+- **Don't "fix" a missing section by hardcoding sample content.** If a section
+  isn't rendering, its array in `src/content/` is empty and that is correct.
+- **Two lists carry ⚠️ warnings**: Mental Care's `services` and Ocean Care's
+  `activities`. ABC labelled these "Ejemplo" and "Posibles actividades" — they
+  are *not confirmed*. Publishing an unconfirmed clinical service list is a real
+  liability for a licensed practice. Read the file headers before touching them,
+  and don't flip either program to `live: true` until ABC confirms.
+
+`src/content/types.ts` holds the shared shapes. Optional fields left blank are
+omitted from the rendered card, so a half-specified offering still looks
+deliberate.
+
+### Shared section components
+
+`PageHero` (full-bleed header, `compact` for sub-pages) and `Section` (content
+band + `.section-title` + `.container`) are the two primitives every plain-CSS
+page is built from. `Section.css` also owns shared helpers used across pages:
+`.section-grid`, `.section-split`, `.section-note`, `.section-empty`,
+`.requirement-list` and `.card-cta`.
+
+Then: `StatGrid`, `TeamGrid`, `TestimonialList`, `FaqList`, `PartnerLogos`,
+`EventList`, `Gallery`, `OfferingGrid`, `ContactForm`, `CrisisNotice`,
+`DonationTiers` — all take content arrays and handle their own empty states.
+
+**Gotcha:** if a page uses a class from `Section.css` without rendering a
+`Section`, import the stylesheet explicitly. Vite bundles all CSS together in
+production, so a missing import only breaks in dev — `BrandLanding.tsx` has that
+import for exactly this reason.
+
+### Two things that are deliberately not wired up
+
+- **Donations** (`DonationTiers`, `/fundacion/donar`) — the whole flow is built
+  and interactive, but `donationsEnabled` in `content/foundation.ts` is `false`
+  and the submit button is disabled. ABC asked for Stripe + ATH Móvil; no
+  processor account exists. Flipping the flag is *not* enough to take money — it
+  also needs a real checkout integration.
+- **Mental Care intake** links out to ABC's own Google Form instead of posting to
+  `/api/contact`. That's on purpose twice over: it's the channel ABC already
+  uses, and a plain web form is not an appropriate place to collect health
+  information. **Don't replace it with an on-site form.**
+
+`CrisisNotice` (988 + Línea PAS) renders on *every* Mental Care page via
+`brands/mental-care/Layout.tsx`. ABC asked for it explicitly; don't make it
+conditional.
+
 ### Tailwind is scoped to Brilliant Brains
 
 `src/brilliant-brains.css` is a load-bearing seam between two styling systems.
@@ -138,19 +207,33 @@ src/
   brands.css                  per-brand accent overrides (light + dark)
   brilliant-brains.css        Tailwind, scoped — READ ITS COMMENTS BEFORE EDITING
   config/brands.tsx           SINGLE SOURCE OF TRUTH (brands, programNav, types)
+  content/                    ALL client copy, as plain data (no JSX)
+    types.ts                  shared shapes; optional fields render only if set
+    centro.ts                 misión, visión, valores, historia (+ empty arrays)
+    mental-care.ts            ⚠️ services list UNCONFIRMED — read the header
+    foundation.ts             donationsEnabled=false; impact arrays empty
+    ocean-care.ts             ⚠️ activities list UNCONFIRMED — read the header
   components/
     PlaceholderImage.tsx      "Foto próximamente" box; `fill` = full-bleed hero bg
     FeatureCard.tsx           card w/ accent top border
     SocialIcons.tsx           inline FB/IG/X SVGs (module-private icon fns)
     BrandLanding.tsx          reusable prototype landing (hero + intro + cards)
+    PageHero.tsx              full-bleed page header; `compact` for sub-pages
+    Section.tsx               content band + .section-title; owns shared helpers
+    StatGrid / TeamGrid / TestimonialList / FaqList / PartnerLogos /
+    EventList / Gallery / OfferingGrid
+                              data-driven sections; empty array = not rendered
+    ContactForm.tsx           plain-CSS form -> /api/contact (Foundation, Ocean)
+    CrisisNotice.tsx          988 + Línea PAS; on every Mental Care page
+    DonationTiers.tsx         donation UI; submit DISABLED (no processor)
     layout/
       Layout.tsx              sets data-brand; Navbar + SubNav + <Outlet/> + Footer
       Navbar.tsx              hierarchical "Programas" dropdown + mobile accordion
-      SubNav.tsx              per-program contextual sub-nav (MQA + BB today)
+      SubNav.tsx              per-program sub-nav + "Vista previa" badge
       Footer.tsx              brand-aware footer
       useActiveBrand.ts       pathname -> active brand (longest-prefix match)
   brands/
-    centro/Home.tsx           umbrella home (features the 3 top-level programs)
+    centro/Home.tsx           umbrella home — misión/visión/valores/historia
     brilliant-brains/          LIVE — ported from ../abc_brilliant_brains
       Layout.tsx              route element supplying the .bb-scope wrapper
       Home.tsx                hero + services carousel
@@ -161,9 +244,11 @@ src/
                               range predates react-router v7)
       reset.css               Tailwind Preflight, scoped to .bb-scope
       css/*.module.css        CSS Modules carried over from the source repo
-    mental-care/Home.tsx      prototype
-    foundation/Home.tsx       landing featuring MQA + Ocean Care
-    ocean-care/Home.tsx       prototype
+    mental-care/              Layout (adds CrisisNotice) + Home, Services,
+                              Team, Resources, Contact
+    foundation/               Home, Initiatives, Impact, Donate, Contact
+    ocean-care/               Home, Activities, Calendar, Join
+    abc-nutrition/Home.tsx    prototype (BrandLanding) — name only
     mas-que-atletas/          LIVE — bespoke pages ported from the MQA repo
       Home.tsx  Sports.tsx  News.tsx  (+ .css)
 ```
@@ -179,6 +264,11 @@ src/
   `config/brands.tsx` (`blurb`, `tagline`).
 - **Social links**: `Brand.social` in `config/brands.tsx`. Only Brilliant Brains
   has real URLs; the rest fall back to `href="#"`.
+- **All client copy**: `src/content/*.ts`. Empty arrays are sections awaiting
+  content; `TODO(ABC)` comments mark specific gaps.
+- **"Agenda una cita"** on the homepage points at Mental Care's Google Form
+  because no booking link or phone number was ever supplied
+  (`scheduleUrl` in `content/centro.ts`).
 - **Search bar / donations**: non-functional UI placeholders. (The Brilliant
   Brains contact + service-request forms are real — see below.)
 

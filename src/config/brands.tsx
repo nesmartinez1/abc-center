@@ -16,6 +16,7 @@ export type BrandId =
   | 'foundation'
   | 'mas-que-atletas'
   | 'ocean-care'
+  | 'abc-nutrition'
 
 /** A page within a brand's own contextual sub-nav (only MQA has several today). */
 export type BrandPage = {
@@ -64,9 +65,9 @@ export const brands: Record<BrandId, Brand> = {
     name: 'ABC Centro Familiar Integral',
     menuLabel: 'Inicio',
     path: '/',
-    tagline: 'Una familia de programas para tu familia.',
+    tagline: 'Un lugar para toda la familia.',
     blurb:
-      'ABC Centro Familiar Integral reúne bajo un mismo techo programas de educación, salud mental, desarrollo y servicio comunitario para niños, jóvenes y familias de Puerto Rico.',
+      'Un espacio integral donde niños, jóvenes, adultos y familias encuentran apoyo para aprender, crecer y alcanzar su máximo potencial.',
     accentName: 'Índigo',
     live: false,
   },
@@ -78,7 +79,7 @@ export const brands: Record<BrandId, Brand> = {
     tagline:
       'Tutorías personalizadas que transforman el aprendizaje en una aventura emocionante.',
     blurb:
-      'Programa educativo enfocado en el desarrollo cognitivo, la creatividad y el amor por el aprendizaje en niños y jóvenes: tutorías individualizadas, programa grupal, asistencia de homeschooling y actividades extracurriculares.',
+      'Programa educativo especializado que ofrece servicios de tutorías, enriquecimiento académico y apoyo al aprendizaje para estudiantes de distintas edades. Su objetivo es fortalecer las habilidades académicas y promover el éxito escolar mediante estrategias individualizadas.',
     accentName: 'Ámbar',
     live: true,
     pages: [
@@ -99,22 +100,38 @@ export const brands: Record<BrandId, Brand> = {
     name: 'ABC Mental Care',
     menuLabel: 'ABC Mental Care',
     path: '/mental-care',
-    tagline: 'Cuidando la salud mental de nuestras familias.',
+    tagline:
+      'Brindamos servicios de salud mental profesionales para fortalecer el bienestar emocional de niños, adolescentes, adultos y familias.',
     blurb:
-      'Servicios de bienestar emocional y salud mental que acompañan a personas y familias en cada etapa de su vida.',
+      'Programa de salud mental que brinda evaluaciones psicológicas, terapia y orientación profesional para niños, adolescentes, adultos y familias. Nuestro enfoque promueve el bienestar emocional y el desarrollo de herramientas para enfrentar los desafíos de la vida.',
     accentName: 'Verde azulado',
     live: false,
+    pages: [
+      { label: 'Inicio', to: '/mental-care', end: true },
+      { label: 'Servicios', to: '/mental-care/servicios' },
+      { label: 'Equipo', to: '/mental-care/equipo' },
+      { label: 'Recursos', to: '/mental-care/recursos' },
+      { label: 'Contacto', to: '/mental-care/contacto' },
+    ],
   },
   foundation: {
     id: 'foundation',
     name: 'ABC Foundation',
     menuLabel: 'ABC Foundation',
     path: '/fundacion',
-    tagline: 'Transformando comunidades a través del servicio.',
+    tagline:
+      'Promovemos el desarrollo de nuestras comunidades mediante iniciativas sociales, educativas y ambientales.',
     blurb:
-      'El brazo sin fines de lucro de ABC, que impulsa iniciativas de impacto comunitario como Más Que Atletas PR y ABC Ocean Care.',
+      'Iniciativa comunitaria dedicada al desarrollo social mediante proyectos de servicio, voluntariado y programas de impacto que promueven el bienestar de nuestras comunidades.',
     accentName: 'Violeta',
     live: false,
+    pages: [
+      { label: 'Inicio', to: '/fundacion', end: true },
+      { label: 'Iniciativas', to: '/fundacion/iniciativas' },
+      { label: 'Impacto', to: '/fundacion/impacto' },
+      { label: 'Donar', to: '/fundacion/donar' },
+      { label: 'Contacto', to: '/fundacion/contacto' },
+    ],
   },
   'mas-que-atletas': {
     id: 'mas-que-atletas',
@@ -140,10 +157,28 @@ export const brands: Record<BrandId, Brand> = {
     name: 'ABC Ocean Care',
     menuLabel: 'ABC Ocean Care',
     path: '/fundacion/ocean-care',
-    tagline: 'Protegiendo nuestro mar, educando nuestra gente.',
+    tagline:
+      'Promovemos la conservación marina mediante educación ambiental, voluntariado y acción comunitaria.',
     blurb:
-      'Iniciativa de conservación y educación ambiental dedicada a proteger las costas y los océanos de Puerto Rico.',
+      'ABC Ocean Care desarrolla iniciativas orientadas a proteger los ecosistemas marinos de Puerto Rico mediante actividades educativas, limpiezas de playas y proyectos de conservación.',
     accentName: 'Azul océano',
+    live: false,
+    pages: [
+      { label: 'Inicio', to: '/fundacion/ocean-care', end: true },
+      { label: 'Actividades', to: '/fundacion/ocean-care/actividades' },
+      { label: 'Calendario', to: '/fundacion/ocean-care/calendario' },
+      { label: 'Únete', to: '/fundacion/ocean-care/unete' },
+    ],
+  },
+  'abc-nutrition': {
+    id: 'abc-nutrition',
+    name: 'ABC Nutrition',
+    menuLabel: 'ABC Nutrition',
+    path: '/fundacion/abc-nutrition',
+    tagline: 'Nutrición como base del bienestar familiar.',
+    blurb:
+      'Próxima iniciativa de ABC Foundation enfocada en la nutrición y los hábitos alimentarios saludables de niños, jóvenes y familias. Los detalles del programa estarán disponibles próximamente.',
+    accentName: 'Rosa',
     live: false,
   },
 }
@@ -166,6 +201,10 @@ export const programNav: NavNode[] = [
   { id: 'mental-care' },
   {
     id: 'foundation',
-    children: [{ id: 'mas-que-atletas' }, { id: 'ocean-care' }],
+    children: [
+      { id: 'mas-que-atletas' },
+      { id: 'ocean-care' },
+      { id: 'abc-nutrition' },
+    ],
   },
 ]

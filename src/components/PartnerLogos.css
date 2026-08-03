@@ -1,0 +1,41 @@
+.partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partner-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+  min-height: 80px;
+  padding: 16px 24px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.partner-item img {
+  max-width: 140px;
+  max-height: 56px;
+  object-fit: contain;
+}
+
+.partner-name {
+  font-weight: 600;
+  color: var(--text-h);
+  text-align: center;
+}
+
+.partner-item a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  text-decoration: none;
+}

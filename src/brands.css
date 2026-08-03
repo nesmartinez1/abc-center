@@ -60,6 +60,15 @@
   --on-ink-accent: #38bdf8;
 }
 
+/* ABC Nutrition — Rosa (kept clear of MQA's green, Mental Care's teal and
+   Brilliant Brains' amber so the six sections stay distinguishable) */
+[data-brand='abc-nutrition'] {
+  --accent: #e11d48;
+  --accent-bg: rgba(225, 29, 72, 0.1);
+  --accent-border: rgba(225, 29, 72, 0.5);
+  --on-ink-accent: #fb7185;
+}
+
 /* ---- Dark-mode accents -------------------------------------------------- */
 
 @media (prefers-color-scheme: dark) {
@@ -97,5 +106,11 @@
     --accent: #38bdf8;
     --accent-bg: rgba(56, 189, 248, 0.15);
     --accent-border: rgba(56, 189, 248, 0.5);
+  }
+
+  [data-brand='abc-nutrition'] {
+    --accent: #fb7185;
+    --accent-bg: rgba(251, 113, 133, 0.15);
+    --accent-border: rgba(251, 113, 133, 0.5);
   }
 }

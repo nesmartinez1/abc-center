@@ -1,0 +1,46 @@
+.centro-home {
+  display: flex;
+  flex-direction: column;
+}
+
+.centro-lead {
+  margin-top: 20px;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text-h);
+}
+
+.centro-body {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+/* Misión / Visión side by side */
+.centro-mv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.centro-mv-item p {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+@media (max-width: 1024px) {
+  .centro-lead {
+    font-size: 19px;
+  }
+
+  .centro-body,
+  .centro-mv-item p {
+    font-size: 17px;
+  }
+
+  .centro-mv {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}

@@ -18,6 +18,11 @@ function SubNav({ activeBrand }: SubNavProps) {
     <nav className="subnav" aria-label={`Secciones de ${activeBrand.name}`}>
       <div className="subnav-inner">
         <span className="subnav-brand">{activeBrand.name}</span>
+        {/* Sub-pages don't carry the hero's preview badge, so surface the
+            program's status here — it's on every page of the section. */}
+        {!activeBrand.live && (
+          <span className="subnav-preview">Vista previa</span>
+        )}
         <div className="subnav-links">
           {activeBrand.pages.map((page) => (
             <NavLink

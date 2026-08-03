@@ -1,0 +1,149 @@
+.donation {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 28px;
+  max-width: 680px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.donation-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.donation-group legend {
+  padding: 0;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.donation-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.donation-option {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.donation-option:hover {
+  border-color: var(--accent-border);
+  color: var(--text-h);
+}
+
+.donation-option.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.donation-option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.donation-custom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+  max-width: 240px;
+}
+
+.donation-custom input {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-h);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+}
+
+.donation-custom input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.donation-impact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.donation-impact strong {
+  color: var(--accent);
+}
+
+.donation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.donation-submit {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 32px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--ink-text);
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.donation-submit:disabled {
+  border-color: var(--border);
+  background: var(--code-bg);
+  color: var(--text);
+  cursor: default;
+}
+
+.donation-pending {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+@media (max-width: 1024px) {
+  .donation {
+    padding: 24px;
+  }
+
+  .donation-submit {
+    align-self: stretch;
+    text-align: center;
+  }
+}
