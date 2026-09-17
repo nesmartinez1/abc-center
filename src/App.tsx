@@ -7,30 +7,41 @@ import CentroHome from './brands/centro/Home'
 import MentalCareLayout from './brands/mental-care/Layout'
 import MentalCareHome from './brands/mental-care/Home'
 import MentalCareServices from './brands/mental-care/Services'
-import MentalCareTeam from './brands/mental-care/Team'
+// Equipo is hidden until ABC supplies team profiles; the import is
+// commented out with the route below (noUnusedLocals would flag it).
+// import MentalCareTeam from './brands/mental-care/Team'
 import MentalCareResources from './brands/mental-care/Resources'
 import MentalCareContact from './brands/mental-care/Contact'
 
 // ABC Foundation
 import FoundationHome from './brands/foundation/Home'
 import FoundationInitiatives from './brands/foundation/Initiatives'
-import FoundationImpact from './brands/foundation/Impact'
-import FoundationDonate from './brands/foundation/Donate'
+// Impacto and Donar are hidden; imports are commented out with their routes
+// below (noUnusedLocals would flag them otherwise).
+// import FoundationImpact from './brands/foundation/Impact'
+// import FoundationDonate from './brands/foundation/Donate'
 import FoundationContact from './brands/foundation/Contact'
 
 // ABC Ocean Care
 import OceanCareHome from './brands/ocean-care/Home'
 import OceanCareActivities from './brands/ocean-care/Activities'
 import OceanCareCalendar from './brands/ocean-care/Calendar'
-import OceanCareJoin from './brands/ocean-care/Join'
+// Únete is hidden for now; the import is commented out with its route below
+// (noUnusedLocals would flag it). Join.tsx is untouched on disk.
+// import OceanCareJoin from './brands/ocean-care/Join'
 
-// ABC Nutrition — announced only; generic prototype landing.
-import AbcNutritionHome from './brands/abc-nutrition/Home'
+// ABC Nutrition — announced only. Hidden until the program is real; the import
+// is commented out with its route below (noUnusedLocals would flag it).
+// import AbcNutritionHome from './brands/abc-nutrition/Home'
 
 // Más Que Atletas PR — fully built, ported from the standalone MQA repo.
 import MqaHome from './brands/mas-que-atletas/Home'
-import MqaSports from './brands/mas-que-atletas/Sports'
-import MqaNews from './brands/mas-que-atletas/News'
+import MqaAbout from './brands/mas-que-atletas/About'
+import MqaRegister from './brands/mas-que-atletas/Register'
+// Deportes and Noticias are hidden; imports are commented out with their
+// routes below (noUnusedLocals would flag them otherwise).
+// import MqaSports from './brands/mas-que-atletas/Sports'
+// import MqaNews from './brands/mas-que-atletas/News'
 
 // ABC Brilliant Brains — fully built, ported from the standalone
 // abc_brilliant_brains repo. Its own layout route supplies the `.bb-scope`
@@ -62,7 +73,7 @@ function App() {
         <Route path="mental-care" element={<MentalCareLayout />}>
           <Route index element={<MentalCareHome />} />
           <Route path="servicios" element={<MentalCareServices />} />
-          <Route path="equipo" element={<MentalCareTeam />} />
+          {/* <Route path="equipo" element={<MentalCareTeam />} /> */}
           <Route path="recursos" element={<MentalCareResources />} />
           <Route path="contacto" element={<MentalCareContact />} />
         </Route>
@@ -71,15 +82,17 @@ function App() {
         <Route path="fundacion">
           <Route index element={<FoundationHome />} />
           <Route path="iniciativas" element={<FoundationInitiatives />} />
-          <Route path="impacto" element={<FoundationImpact />} />
-          <Route path="donar" element={<FoundationDonate />} />
+          {/* <Route path="impacto" element={<FoundationImpact />} /> */}
+          {/* <Route path="donar" element={<FoundationDonate />} /> */}
           <Route path="contacto" element={<FoundationContact />} />
 
           {/* Más Que Atletas PR (live) */}
           <Route path="mas-que-atletas">
             <Route index element={<MqaHome />} />
-            <Route path="deportes" element={<MqaSports />} />
-            <Route path="noticias" element={<MqaNews />} />
+            <Route path="nosotros" element={<MqaAbout />} />
+            <Route path="registro" element={<MqaRegister />} />
+            {/* <Route path="deportes" element={<MqaSports />} /> */}
+            {/* <Route path="noticias" element={<MqaNews />} /> */}
           </Route>
 
           {/* ABC Ocean Care */}
@@ -87,11 +100,11 @@ function App() {
             <Route index element={<OceanCareHome />} />
             <Route path="actividades" element={<OceanCareActivities />} />
             <Route path="calendario" element={<OceanCareCalendar />} />
-            <Route path="unete" element={<OceanCareJoin />} />
+            {/* <Route path="unete" element={<OceanCareJoin />} /> */}
           </Route>
 
-          {/* ABC Nutrition (announced) */}
-          <Route path="abc-nutrition" element={<AbcNutritionHome />} />
+          {/* ABC Nutrition — announced only, no route until the program exists. */}
+          {/* <Route path="abc-nutrition" element={<AbcNutritionHome />} /> */}
         </Route>
       </Route>
     </Routes>

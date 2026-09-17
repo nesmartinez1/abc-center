@@ -10,21 +10,23 @@ function MentalCareResources() {
         compact
         title="Recursos"
         tagline="Orientación práctica sobre salud mental para toda la familia."
+        image={mc.resourcesHeroImage}
       />
 
       <Section
-        heading="Temas que cubrimos"
-        intro="Publicamos orientación mensual escrita por nuestro equipo. Estos son los temas en los que nos enfocamos."
+        heading="Profesionales disponibles"
+        intro="Nuestro equipo interdisciplinario atiende la salud mental desde distintas especialidades, según lo que cada persona o familia necesite."
       >
         <div className="section-grid">
-          {mc.resourceTopics.map((topic) => (
+          {mc.resourceProfessionals.map((professional) => (
             <FeatureCard
-              key={topic.name}
-              title={topic.name}
-              description={topic.description}
+              key={professional.name}
+              title={professional.name}
+              description={professional.description}
             />
           ))}
         </div>
+        <p className="section-note">{mc.resourceProfessionalsNote}</p>
       </Section>
 
       <Section heading="Artículos" muted>

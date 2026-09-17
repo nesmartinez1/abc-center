@@ -9,6 +9,12 @@
 
 import type { EventItem, Partner, Stat, Testimonial } from './types'
 
+/**
+ * Hero photography. Source in assets-src/photos/foundation/; regenerate with
+ * scripts/build-photos.py.
+ */
+export const heroImage = '/photos/foundation/hero.webp'
+
 export const intro =
   'Promovemos el desarrollo de nuestras comunidades mediante iniciativas sociales, educativas y ambientales.'
 

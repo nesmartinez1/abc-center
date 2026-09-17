@@ -54,13 +54,6 @@ export const values = [
 export const history =
   'ABC Centro Familiar Integral fue fundado en 2024 por Inarah Agueda Felix con el propósito de ofrecer servicios integrales que respondieran a las necesidades educativas, emocionales y sociales de las familias puertorriqueñas. Desde entonces, la organización ha crecido incorporando programas especializados que impactan distintas áreas del desarrollo humano.'
 
-/**
- * TODO(ABC): no scheduling destination was provided. This points at Mental
- * Care's Google Form — the only real intake channel that exists today. Replace
- * with a booking link or `tel:` number once ABC confirms one.
- */
-export const scheduleUrl = 'https://forms.gle/AQZJCmiC8nHuLvw1A'
-
 /* ---- Approved by ABC, content still pending. Empty = section not rendered. -- */
 
 /** TODO(ABC): bios, licences and portraits. ABC said Natalia would provide. */
@@ -72,5 +65,47 @@ export const faqs: Faq[] = []
 export const partners: Partner[] = []
 export const events: EventItem[] = []
 
-/** Gallery renders N placeholder frames until real photos arrive. */
-export const galleryPlaceholderCount = 6
+/**
+ * Photography supplied by ABC. Sources live in assets-src/photos/centro/;
+ * regenerate with scripts/build-photos.py.
+ */
+export const heroImage = '/photos/centro/hero.webp'
+
+/**
+ * Activity photos. Described rather than decorative — these are the only images
+ * on the umbrella page carrying content a reader would otherwise miss.
+ */
+export const galleryImages = [
+  {
+    src: '/photos/centro/gallery-1.webp',
+    alt: 'Dos niñas bailan con abanicos de colores sobre colchonetas en una actividad al aire libre.',
+  },
+  {
+    src: '/photos/centro/gallery-2.webp',
+    alt: 'Una facilitadora juega con una niña usando una tela rosada en la playa, junto a una carpa azul.',
+  },
+  {
+    src: '/photos/centro/gallery-3.webp',
+    alt: 'Manos de niños coloreando con lápices un mural de animales: una tortuga, un mono y un tigre.',
+  },
+  {
+    src: '/photos/centro/gallery-4.webp',
+    alt: 'Un niño sonríe mientras sostiene una planta modelada en plastilina durante una actividad en el centro comercial.',
+  },
+  {
+    src: '/photos/centro/gallery-5.webp',
+    alt: 'Una niña muestra una bandeja con su trabajo de plastilina junto a envases de colores.',
+  },
+  {
+    src: '/photos/centro/gallery-6.webp',
+    alt: 'Integrantes de Más Que Atletas PR posan en estudio con un balón de fútbol.',
+  },
+  {
+    src: '/photos/centro/gallery-7.webp',
+    alt: 'Manos pintando sobre papel con una paleta de acrílicos y pinceles.',
+  },
+  {
+    src: '/photos/centro/gallery-8.webp',
+    alt: 'Una voluntaria acompaña a un niño pequeño en una mesa de manualidades al aire libre.',
+  },
+]

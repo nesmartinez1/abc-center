@@ -15,16 +15,19 @@ function OceanCareHome() {
         brand={brand}
         title={brand.name}
         tagline={oc.intro}
+        image={oc.heroImage}
       >
         <div className="page-hero-actions">
-          <Link
+          {/* Hidden with the Únete page; restore this as the primary CTA and
+              send Ver actividades back to --secondary when it returns. */}
+          {/* <Link
             className="page-hero-cta page-hero-cta--primary"
             to="/fundacion/ocean-care/unete"
           >
             Únete como voluntario
-          </Link>
+          </Link> */}
           <Link
-            className="page-hero-cta page-hero-cta--secondary"
+            className="page-hero-cta page-hero-cta--primary"
             to="/fundacion/ocean-care/actividades"
           >
             Ver actividades
@@ -52,19 +55,20 @@ function OceanCareHome() {
               Ver calendario
             </Link>
           </FeatureCard>
-          <FeatureCard
+          {/* Hidden with the Únete page — its only CTA pointed there. */}
+          {/* <FeatureCard
             title="Voluntariado"
             description="Suma tu tiempo a la conservación de nuestras costas. Toda ayuda cuenta, sin importar la experiencia."
           >
             <Link to="/fundacion/ocean-care/unete" className="card-cta">
               Únete
             </Link>
-          </FeatureCard>
+          </FeatureCard> */}
         </div>
       </Section>
 
       <Section heading="Galería">
-        <Gallery placeholderCount={oc.galleryPlaceholderCount} />
+        <Gallery images={oc.galleryImages} />
       </Section>
     </div>
   )

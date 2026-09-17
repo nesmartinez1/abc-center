@@ -65,5 +65,19 @@
   color: var(--accent);
   font-weight: 600;
   font-size: 14px;
+  /* Written for an inert <span>; MQA now renders real <a>/<Link> here, so the
+     anchor cases need pointer + no underline. Inert spans keep `default`. */
   cursor: default;
+  text-decoration: none;
+}
+
+a.feature-card-cta {
+  cursor: pointer;
+}
+
+a.feature-card-cta:hover,
+a.feature-card-cta:focus-visible {
+  background: var(--accent);
+  color: var(--ink-text);
+  border-color: var(--accent);
 }

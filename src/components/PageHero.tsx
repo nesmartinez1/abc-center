@@ -16,6 +16,18 @@ type PageHeroProps = {
    * would both disappear against it. The chip makes one treatment work for all.
    */
   brand?: Brand
+  /**
+   * Full-bleed background photo. Falls back to the placeholder frame for the
+   * brands that haven't supplied photography yet.
+   */
+  image?: string
+  /**
+   * `object-position` for that photo. Default `center` suits a photograph, where
+   * the subject is mid-frame. Foundation's hero is a promotional graphic with
+   * its logos along the top edge, so it anchors to `center top` — whatever the
+   * box crops comes off the bottom, never off the logos.
+   */
+  imagePosition?: string
   /** Buttons / links rendered under the tagline. */
   children?: ReactNode
   /** Shorter hero for sub-pages, which shouldn't each own a full viewport. */
@@ -32,12 +44,25 @@ function PageHero({
   tagline,
   badge,
   brand,
+  image,
+  imagePosition,
   children,
   compact,
 }: PageHeroProps) {
   return (
     <section className={`page-hero ${compact ? 'page-hero--compact' : ''}`}>
-      <PlaceholderImage label="Foto próximamente" fill />
+      {image ? (
+        /* Decorative: the <h1> beside it carries the meaning. Not lazy —
+           this is the page's LCP element. */
+        <img
+          className="page-hero-photo"
+          src={image}
+          alt=""
+          style={imagePosition ? { objectPosition: imagePosition } : undefined}
+        />
+      ) : (
+        <PlaceholderImage label="Foto próximamente" fill />
+      )}
       <div className="page-hero-scrim" />
       <div className="page-hero-content">
         {badge && <span className="page-hero-badge">{badge}</span>}

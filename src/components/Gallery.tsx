@@ -1,9 +1,16 @@
 import PlaceholderImage from './PlaceholderImage'
 import './Gallery.css'
 
+/**
+ * A plain string is a decorative photo (`alt=""`); the object form carries a
+ * description. Both are accepted so call sites that predate alt text keep
+ * working — see content/ocean-care.ts.
+ */
+export type GalleryImage = string | { src: string; alt: string }
+
 type GalleryProps = {
   /** Real photo paths under /public. Empty until ABC sends photography. */
-  images?: string[]
+  images?: GalleryImage[]
   /** Number of placeholder frames to show while `images` is empty. */
   placeholderCount?: number
 }
@@ -26,9 +33,19 @@ function Gallery({ images = [], placeholderCount = 6 }: GalleryProps) {
 
   return (
     <div className="gallery">
-      {images.map((src) => (
-        <img key={src} src={src} alt="" loading="lazy" className="gallery-img" />
-      ))}
+      {images.map((image) => {
+        const { src, alt } =
+          typeof image === 'string' ? { src: image, alt: '' } : image
+        return (
+          <img
+            key={src}
+            src={src}
+            alt={alt}
+            loading="lazy"
+            className="gallery-img"
+          />
+        )
+      })}
     </div>
   )
 }

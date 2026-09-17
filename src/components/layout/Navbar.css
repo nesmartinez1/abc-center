@@ -240,10 +240,17 @@
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.navbar-dropdown-link:hover,
+.navbar-dropdown-link:not(.navbar-dropdown-link--inert):hover,
 .navbar-dropdown-link.active {
   background: var(--accent-bg);
   color: var(--accent);
+}
+
+/* Non-live programs: same row metrics as a link, but visibly not one — muted,
+   no pointer, and excluded from the :hover rule above. */
+.navbar-dropdown-link--inert {
+  color: var(--text);
+  cursor: default;
 }
 
 .navbar-dropdown-link--nested {

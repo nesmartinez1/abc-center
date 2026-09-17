@@ -47,5 +47,17 @@ export const volunteerRequirements = [
 export const volunteerNote =
   'Completa el formulario y te contactaremos con los detalles de la próxima actividad.'
 
-/** Gallery renders N placeholder frames until real activity photos arrive. */
-export const galleryPlaceholderCount = 6
+/** Hero backgrounds. Decorative — the <h1> over each carries the meaning. */
+export const heroImage = '/photos/ocean-care/hero.webp'
+export const activitiesHeroImage = '/photos/ocean-care/hero-actividades.webp'
+export const calendarHeroImage = '/photos/ocean-care/hero-calendario.webp'
+
+/**
+ * Activity photos supplied by ABC. Sources live in
+ * assets-src/photos/ocean-care/; regenerate with scripts/build-photos.py.
+ */
+export const galleryImages = [
+  '/photos/ocean-care/gallery-1.webp',
+  '/photos/ocean-care/gallery-2.webp',
+  '/photos/ocean-care/gallery-3.webp',
+]

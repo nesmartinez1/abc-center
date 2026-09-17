@@ -48,6 +48,27 @@ function Navbar({ activeBrand }: NavbarProps) {
 
   const renderLeaf = (id: BrandId, nested: boolean) => {
     const brand = brands[id]
+
+    // A program that isn't live has no page to send anyone to. The badge alone
+    // wouldn't stop anyone clicking a link, so the row is a plain span.
+    if (!brand.live) {
+      return (
+        <span
+          key={id}
+          className={[
+            'navbar-dropdown-link',
+            'navbar-dropdown-link--inert',
+            nested && 'navbar-dropdown-link--nested',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        >
+          <span>{brand.menuLabel}</span>
+          <span className="navbar-dropdown-badge">Próximamente</span>
+        </span>
+      )
+    }
+
     return (
       <NavLink
         key={id}
@@ -65,9 +86,6 @@ function Navbar({ activeBrand }: NavbarProps) {
         onClick={closeAll}
       >
         <span>{brand.menuLabel}</span>
-        {!brand.live && (
-          <span className="navbar-dropdown-badge">Próximamente</span>
-        )}
       </NavLink>
     )
   }

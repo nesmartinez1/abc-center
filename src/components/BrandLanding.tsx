@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import PageHero from './PageHero'
 import FeatureCard from './FeatureCard'
 import type { Brand } from '../config/brands'
@@ -7,6 +6,7 @@ import type { Brand } from '../config/brands'
 // unstyled in dev (production bundles all CSS together and would hide this).
 import './Section.css'
 import './BrandLanding.css'
+import BrandCardCta from './BrandCardCta'
 
 type BrandLandingProps = {
   brand: Brand
@@ -51,9 +51,7 @@ function BrandLanding({ brand, childBrands }: BrandLandingProps) {
                     title={child.name}
                     description={child.blurb}
                   >
-                    <Link to={child.path} className="card-cta">
-                      {child.live ? 'Visitar programa' : 'Ver vista previa'}
-                    </Link>
+                    <BrandCardCta brand={child} />
                   </FeatureCard>
                 ))
               : Array.from({ length: 3 }, (_, i) => (

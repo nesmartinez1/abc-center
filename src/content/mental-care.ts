@@ -26,6 +26,15 @@ export const intro =
 export const about =
   'ABC Mental Care ofrece servicios psicológicos basados en evidencia para atender las necesidades emocionales y conductuales de la comunidad. Nuestro equipo acompaña a cada paciente mediante evaluaciones, intervenciones terapéuticas y orientación profesional, promoviendo una mejor calidad de vida. Trabajamos de forma individualizada para ofrecer un espacio seguro, confidencial y de apoyo.'
 
+/**
+ * Hero photography. Source in assets-src/photos/mental-care/; regenerate with
+ * scripts/build-photos.py.
+ */
+export const heroImage = '/photos/mental-care/hero.webp'
+export const servicesHeroImage = '/photos/mental-care/hero-servicios.webp'
+export const resourcesHeroImage = '/photos/mental-care/hero-recursos.webp'
+export const contactHeroImage = '/photos/mental-care/hero-contacto.webp'
+
 export const relationshipWithBrilliantBrains =
   'Aunque ambos programas pueden atender a las mismas familias, cada uno responde a necesidades distintas. Brilliant Brains se enfoca en el desarrollo educativo y académico, mientras que Mental Care ofrece servicios de salud mental. Cuando es apropiado, ambos programas colaboran para brindar un apoyo integral.'
 
@@ -66,34 +75,40 @@ export const crisisLines = [
   },
 ]
 
-/** Confirmed topics for the monthly articles ABC plans to publish. */
-export const resourceTopics: ResourceTopic[] = [
+/**
+ * The disciplines available through ABC Mental Care.
+ *
+ * ⚠️ Like the service list above, this is a claim about who practises here, and
+ * it is the kind a licensing board cares about — "psiquiatras" in particular
+ * implies prescribers on staff. Descriptions below stay at the level of what
+ * each discipline does, and deliberately state no counts, names or licence
+ * numbers. The Equipo page is still hidden for exactly that reason.
+ *
+ * Replaced the five article topics (Ansiedad, TDAH, Crianza, Manejo emocional,
+ * Salud mental infantil) that used to live here; git history has them if the
+ * article programme comes back.
+ */
+export const resourceProfessionals: ResourceTopic[] = [
   {
-    name: 'Ansiedad',
+    name: 'Psicólogos',
     description:
-      'Cómo reconocer las señales de ansiedad en distintas edades y qué estrategias ayudan a manejarla.',
+      'Realizan evaluaciones psicológicas y ofrecen terapia individual, familiar y de pareja para niños, adolescentes y adultos.',
   },
   {
-    name: 'TDAH',
+    name: 'Psiquiatras',
     description:
-      'Orientación sobre el diagnóstico, el acompañamiento escolar y el manejo en el hogar.',
+      'Atienden la dimensión médica de la salud mental, incluyendo la evaluación diagnóstica y el manejo de tratamiento cuando es necesario.',
   },
   {
-    name: 'Crianza',
+    name: 'Trabajadores sociales',
     description:
-      'Herramientas prácticas para criar con límites sanos, comunicación y conexión.',
-  },
-  {
-    name: 'Manejo emocional',
-    description:
-      'Recursos para identificar, expresar y regular las emociones en la vida diaria.',
-  },
-  {
-    name: 'Salud mental infantil',
-    description:
-      'Qué esperar en cada etapa del desarrollo y cuándo buscar apoyo profesional.',
+      'Acompañan a las familias en la coordinación de servicios, el enlace con la escuela y la comunidad, y el acceso a recursos de apoyo.',
   },
 ]
+
+/** Shown under the list above: the roster is still growing. */
+export const resourceProfessionalsNote =
+  'Seguimos ampliando nuestro equipo interdisciplinario. Próximamente estaremos añadiendo otras especialidades de la salud mental y el bienestar familiar.'
 
 /** TODO(ABC): monthly articles. Empty = the article list is not rendered. */
 export const articles: Article[] = []

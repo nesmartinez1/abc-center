@@ -20,8 +20,8 @@ type BrandLogoProps = {
 
 /**
  * Renders a brand's logo, falling back to the "Logo próximamente" placeholder
- * for brands that don't have one yet (today: ABC Nutrition). Call sites never
- * need to check.
+ * for any brand without one. Every brand has a logo today; the fallback is what
+ * lets call sites stay ignorant of that. Call sites never need to check.
  */
 function BrandLogo({
   brand,

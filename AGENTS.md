@@ -146,7 +146,8 @@ import for exactly this reason.
   and interactive, but `donationsEnabled` in `content/foundation.ts` is `false`
   and the submit button is disabled. ABC asked for Stripe + ATH Móvil; no
   processor account exists. Flipping the flag is *not* enough to take money — it
-  also needs a real checkout integration.
+  also needs a real checkout integration. **The page is now unrouted too**
+  (with Impacto), and the CTAs that pointed at it go to `/fundacion/contacto`.
 - **Mental Care intake** links out to ABC's own Google Form instead of posting to
   `/api/contact`. That's on purpose twice over: it's the channel ABC already
   uses, and a plain web form is not an appropriate place to collect health
@@ -184,7 +185,8 @@ Two things in that script are load-bearing:
 
 Each brand gets two variants, wired through `Brand.logo` and rendered by
 `components/BrandLogo.tsx` (which falls back to `PlaceholderImage`, so call
-sites never check — ABC Nutrition has no logo yet):
+sites never check — all seven brands now have one, but the fallback stays for
+whatever is added next):
 
 - **`full`** — the whole lockup. Use at 100px+ only.
 - **`mark`** — the cropped symbol. The *only* version legible below ~80px;
@@ -197,6 +199,38 @@ completely invisible. Hence `.brand-logo-chip` (hero) and the white backdrop on
 `.feature-card-logo`. The card chip is pure white, which disappears against
 light-mode `--bg` (also white) and becomes a visible panel in dark mode. Don't
 "simplify" either away.
+
+### Photos
+
+Same shape as logos, different script. Originals go in
+**`assets-src/photos/<brand>/`**, generated WebP in `public/photos/<brand>/`:
+
+```bash
+python3 scripts/build-photos.py   # writes public/photos/, commit the output
+```
+
+`build-photos.py` is deliberately much dumber than `build-logos.py` — photographs
+need no background removal, no trimming and no hand-measured crops, so all it
+does is downscale-if-oversized and encode WebP at the same quality settings.
+
+`Gallery` takes either plain paths or `{ src, alt }` objects; use the object
+form for photos that carry content a reader would otherwise miss (Centro's
+gallery does, Ocean Care's doesn't yet). `.gallery-img` crops at
+`object-position: center 35%` because several sources are portrait and a centred
+4:3 crop cuts heads off.
+
+`TOP_CROP` keeps only the top N% of a source before resizing. It exists for
+Foundation's hero, which is a promotional graphic with a banner across the
+bottom: cropping in the script holds at every viewport, while `object-position`
+alone only bites when the box is wide enough to force a vertical crop (on a
+phone, `cover` crops the sides instead and the banner reappears). `PageHero`'s
+`imagePosition` prop then anchors what's left, so any crop comes off the bottom.
+
+**It never upscales.** ABC has so far sent images below the 1600px-wide cover
+photo we asked for (`../abc-content-outstanding.md`); the MQA hero is 1026px.
+Blowing those up to fill a full-bleed hero looks worse, not better, and hides
+the fact that a better export is still outstanding. Add new photos by extending
+the `PHOTOS` dict and re-running.
 
 ### Tailwind is scoped to Brilliant Brains
 
@@ -322,18 +356,30 @@ src/
       reset.css               Tailwind Preflight, scoped to .bb-scope
       css/*.module.css        CSS Modules carried over from the source repo
     mental-care/              Layout (adds CrisisNotice) + Home, Services,
-                              Team, Resources, Contact
-    foundation/               Home, Initiatives, Impact, Donate, Contact
+                              Resources, Contact. Team.tsx exists but is
+                              UNROUTED — the Equipo route, sub-nav entry
+                              and home card are commented out until ABC
+                              supplies profiles. Uncomment all three.
+    foundation/               Home, Initiatives, Contact. Impact.tsx /
+                              Donate.tsx exist but are UNROUTED — Impacto and
+                              Donar are commented out in App.tsx and brands.tsx
+                              until ABC has figures and a payment processor.
     ocean-care/               Home, Activities, Calendar, Join
     abc-nutrition/Home.tsx    prototype (BrandLanding) — name only
     mas-que-atletas/          LIVE — bespoke pages ported from the MQA repo
-      Home.tsx  Sports.tsx  News.tsx  (+ .css)
+      Home.tsx  About.tsx  Register.tsx  (+ .css). Sports.tsx /
+                              News.tsx exist
+                              but are UNROUTED — Deportes and Noticias are
+                              commented out in App.tsx and brands.tsx until
+                              ABC sends photos and news copy. Register.tsx and
+                              the home page share their copy via
+                              content/mas-que-atletas.ts.
 ```
 
 ## Placeholders to replace when real assets arrive
 
-- **Logo**: done — ABC Centro's mark is in the navbar and the favicon. Missing:
-  ABC Nutrition has no logo, and all six are JPEG exports of vector art
+- **Logo**: done — all seven brands have one, and ABC Centro's mark is in the
+  navbar and the favicon. Missing: they're all JPEG exports of vector art
   (raster, so they soften when scaled up). Vector originals are on the
   outstanding list.
 - **Hero/section photos**: `PlaceholderImage` boxes throughout (labeled "Foto
@@ -346,9 +392,6 @@ src/
   has real URLs; the rest fall back to `href="#"`.
 - **All client copy**: `src/content/*.ts`. Empty arrays are sections awaiting
   content; `TODO(ABC)` comments mark specific gaps.
-- **"Agenda una cita"** on the homepage points at Mental Care's Google Form
-  because no booking link or phone number was ever supplied
-  (`scheduleUrl` in `content/centro.ts`).
 - **Search bar / donations**: non-functional UI placeholders. (The Brilliant
   Brains contact + service-request forms are real — see below.)
 
@@ -382,7 +425,7 @@ bundle.
 ## Deployment note
 
 `BrowserRouter` needs **SPA fallback** — the host must rewrite unknown paths to
-`index.html`, or deep loads (e.g. `/fundacion/mas-que-atletas/noticias`) 404 in
+`index.html`, or deep loads (e.g. `/fundacion/mas-que-atletas/nosotros`) 404 in
 production.
 
 ## Verifying changes

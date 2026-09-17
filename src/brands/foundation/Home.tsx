@@ -4,6 +4,7 @@ import Section from '../../components/Section'
 import FeatureCard from '../../components/FeatureCard'
 import { brands } from '../../config/brands'
 import * as foundation from '../../content/foundation'
+import BrandCardCta from '../../components/BrandCardCta'
 
 const initiatives = [
   brands['mas-que-atletas'],
@@ -20,16 +21,12 @@ function FoundationHome() {
         brand={brand}
         title={brand.name}
         tagline={foundation.intro}
+        image={foundation.heroImage}
+        imagePosition="center top"
       >
         <div className="page-hero-actions">
           <Link
             className="page-hero-cta page-hero-cta--primary"
-            to="/fundacion/donar"
-          >
-            Apoya nuestra misión
-          </Link>
-          <Link
-            className="page-hero-cta page-hero-cta--secondary"
             to="/fundacion/iniciativas"
           >
             Ver iniciativas
@@ -61,9 +58,7 @@ function FoundationHome() {
               description={initiative.blurb}
               brand={initiative}
             >
-              <Link to={initiative.path} className="card-cta">
-                {initiative.live ? 'Visitar programa' : 'Ver vista previa'}
-              </Link>
+              <BrandCardCta brand={initiative} />
             </FeatureCard>
           ))}
         </div>

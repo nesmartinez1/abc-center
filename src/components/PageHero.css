@@ -17,6 +17,16 @@
   min-height: 42svh;
 }
 
+/* Real background photo, for the brands that have supplied one. Sits under
+   .page-hero-scrim, which is declared next and also covers the section. */
+.page-hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .page-hero-scrim {
   position: absolute;
   inset: 0;

@@ -14,6 +14,8 @@ function MentalCareHome() {
         brand={brand}
         title={brand.name}
         tagline={mc.intro}
+        image={mc.heroImage}
+        imagePosition="center top"
       >
         <div className="page-hero-actions">
           <a
@@ -45,6 +47,8 @@ function MentalCareHome() {
               Ver servicios
             </Link>
           </FeatureCard>
+          {/* Hidden until ABC supplies team profiles — the Equipo page and
+              its sub-nav entry are commented out too. See content/mental-care.ts.
           <FeatureCard
             title="Nuestro equipo"
             description="Profesionales licenciados que acompañan a cada paciente en un espacio seguro y confidencial."
@@ -53,9 +57,10 @@ function MentalCareHome() {
               Conoce al equipo
             </Link>
           </FeatureCard>
+          */}
           <FeatureCard
             title="Recursos"
-            description="Artículos y orientación sobre ansiedad, TDAH, crianza, manejo emocional y salud mental infantil."
+            description="Conoce las especialidades de nuestro equipo interdisciplinario: psicología, psiquiatría y trabajo social."
           >
             <Link to="/mental-care/recursos" className="card-cta">
               Ver recursos

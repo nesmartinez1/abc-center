@@ -56,6 +56,7 @@ LOGOS = {
     "foundation": "abc-foundation-logo.jpeg",
     "mas-que-atletas": "MAQ-logo.jpeg",
     "ocean-care": "abc-oc-logo.jpeg",
+    "abc-nutrition": "abc-nutrition-logo.jpeg",
 }
 
 # Symbol crop within the ORIGINAL image, as (left, top, right, bottom).
@@ -74,6 +75,12 @@ MARKS = {
     "mas-que-atletas": (400, 415, 1165, 1075),
     # Unified circular badge — turtle, ABC, wave and manatee are one mark.
     "ocean-care": None,
+    # The "C" enclosing the figure-and-leaves motif. The full lockup is 2.5:1 and
+    # shrinks to nothing at mark sizes; the C is the one near-square,
+    # self-contained element that survives below ~80px. Left edge is 900, not
+    # the C's own start: the tan "B" runs to x=896 and a wider crop drags a
+    # brown sliver into the frame.
+    "abc-nutrition": (900, 730, 1270, 1100),
 }
 
 

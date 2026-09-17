@@ -18,8 +18,8 @@ function FeatureCard({ title, description, brand, children }: FeatureCardProps) 
   return (
     <div className="feature-card">
       {/* Rendered for any brand, not just ones with a logo: BrandLogo falls back
-          to a placeholder, which keeps titles aligned across a grid where one
-          card (ABC Nutrition) has no logo yet. */}
+          to a placeholder, which keeps titles aligned across a grid even if one
+          card's brand is missing its logo. */}
       {brand && (
         <div className="feature-card-logo">
           <BrandLogo brand={brand} decorative />

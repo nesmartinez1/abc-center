@@ -17,6 +17,8 @@ function MentalCareContact() {
         compact
         title="Contacto"
         tagline="Da el primer paso. Estamos aquí para acompañarte."
+        image={mc.contactHeroImage}
+        imagePosition="center bottom"
       />
 
       <Section heading="Solicita una cita" narrow>

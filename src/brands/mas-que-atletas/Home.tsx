@@ -1,14 +1,21 @@
-import PlaceholderImage from '../../components/PlaceholderImage'
+import { Link } from 'react-router-dom'
 import FeatureCard from '../../components/FeatureCard'
 import BrandLogo from '../../components/BrandLogo'
 import { brands } from '../../config/brands'
+import * as mqa from '../../content/mas-que-atletas'
 import './Home.css'
 
 function Home() {
   return (
     <div className="home-page">
       <section className="home-hero">
-        <PlaceholderImage label="Foto próximamente" fill />
+        {/* Decorative: the <h1> beside it carries the meaning. Not lazy —
+            this is the page's LCP element. */}
+        <img
+          className="home-hero-photo"
+          src="/photos/mas-que-atletas/hero.webp"
+          alt=""
+        />
         <div className="home-hero-scrim" />
         <div className="home-hero-content">
           {/* This page has its own hero rather than the shared PageHero, so the
@@ -35,7 +42,12 @@ function Home() {
       <section className="home-about">
         <div className="container home-about-inner">
           <div className="home-about-media">
-            <PlaceholderImage label="Foto próximamente" ratio="4/3" />
+            <img
+              className="home-about-photo"
+              src="/photos/mas-que-atletas/about.webp"
+              alt="Tres integrantes de Más Que Atletas PR, en uniforme, unen las manos en el centro."
+              loading="lazy"
+            />
           </div>
           <div className="home-about-text">
             <h2 className="section-heading">
@@ -60,22 +72,28 @@ function Home() {
         <div className="container">
           <div className="home-features-grid">
             <FeatureCard
-              title="Programas Deportivos"
-              description="Conoce nuestras clínicas y actividades deportivas diseñadas para desarrollar habilidades, disciplina y trabajo en equipo en niños y jóvenes."
+              title="Nosotros"
+              description="Conoce nuestra misión, visión y el propósito que guía cada clínica, entrenamiento y experiencia que ofrecemos a niños y jóvenes."
             >
-              <span className="feature-card-cta">Ver programas</span>
+              <Link
+                to="/fundacion/mas-que-atletas/nosotros"
+                className="feature-card-cta"
+              >
+                Conócenos
+              </Link>
             </FeatureCard>
             <FeatureCard
               title="Registro de Interés"
-              description="Completa nuestro formulario para recibir información sobre futuras clínicas, eventos deportivos y oportunidades disponibles en tu comunidad."
+              description={mqa.interestFormBlurb}
             >
-              <span className="feature-card-cta">Próximamente</span>
-            </FeatureCard>
-            <FeatureCard
-              title="Apoya Nuestra Misión"
-              description="Tu apoyo nos ayuda a brindar más oportunidades deportivas a niños y jóvenes. Puedes colaborar mediante donaciones, auspicios o voluntariado."
-            >
-              <span className="feature-card-cta">Próximamente</span>
+              <a
+                className="feature-card-cta"
+                href={mqa.interestFormUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Completar formulario
+              </a>
             </FeatureCard>
           </div>
         </div>

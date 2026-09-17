@@ -3,6 +3,7 @@ import PageHero from '../../components/PageHero'
 import Section from '../../components/Section'
 import FeatureCard from '../../components/FeatureCard'
 import { brands } from '../../config/brands'
+import BrandCardCta from '../../components/BrandCardCta'
 
 const initiatives = [
   brands['mas-que-atletas'],
@@ -31,9 +32,7 @@ function FoundationInitiatives() {
               description={initiative.blurb}
               brand={initiative}
             >
-              <Link to={initiative.path} className="card-cta">
-                {initiative.live ? 'Visitar programa' : 'Ver vista previa'}
-              </Link>
+              <BrandCardCta brand={initiative} />
             </FeatureCard>
           ))}
         </div>
@@ -44,8 +43,8 @@ function FoundationInitiatives() {
           Puedes apoyar nuestras iniciativas mediante donaciones, voluntariado o
           aportaciones en especie.
         </p>
-        <Link to="/fundacion/donar" className="card-cta">
-          Conoce cómo ayudar
+        <Link to="/fundacion/contacto" className="card-cta">
+          Escríbenos
         </Link>
       </Section>
     </div>

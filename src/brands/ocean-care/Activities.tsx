@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+// Hidden with the Únete page; the import is commented out with the section
+// below (noUnusedLocals would flag it).
+// import { Link } from 'react-router-dom'
 import PageHero from '../../components/PageHero'
 import Section from '../../components/Section'
 import OfferingGrid from '../../components/OfferingGrid'
@@ -15,6 +17,7 @@ function OceanCareActivities() {
         compact
         title="Actividades"
         tagline="Educación ambiental y acción directa por nuestras costas."
+        image={oc.activitiesHeroImage}
       />
 
       <Section
@@ -24,7 +27,8 @@ function OceanCareActivities() {
         <OfferingGrid offerings={oc.activities} />
       </Section>
 
-      <Section heading="¿Quieres participar?" muted narrow>
+      {/* Hidden with the Únete page; uncomment with the Link import above. */}
+      {/* <Section heading="¿Quieres participar?" muted narrow>
         <p className="section-intro">
           Nuestras actividades están abiertas a la comunidad. Regístrate como
           voluntario y te avisaremos de la próxima fecha.
@@ -32,7 +36,7 @@ function OceanCareActivities() {
         <Link to="/fundacion/ocean-care/unete" className="card-cta">
           Únete como voluntario
         </Link>
-      </Section>
+      </Section> */}
     </div>
   )
 }

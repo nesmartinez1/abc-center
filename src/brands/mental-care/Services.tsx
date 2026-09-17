@@ -15,6 +15,7 @@ function MentalCareServices() {
         compact
         title="Servicios"
         tagline="Evaluaciones, terapia y orientación profesional para cada etapa de la vida."
+        image={mc.servicesHeroImage}
       />
 
       <Section

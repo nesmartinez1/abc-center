@@ -3,15 +3,19 @@ import PageHero from '../../components/PageHero'
 import Section from '../../components/Section'
 import FeatureCard from '../../components/FeatureCard'
 import StatGrid from '../../components/StatGrid'
-import TeamGrid from '../../components/TeamGrid'
-import TestimonialList from '../../components/TestimonialList'
-import FaqList from '../../components/FaqList'
-import PartnerLogos from '../../components/PartnerLogos'
-import EventList from '../../components/EventList'
+// Commented out alongside the sections below that use them — the components
+// exist and the sections are ready, ABC just hasn't sent the content.
+// noUnusedLocals means the imports can't stay while the JSX is commented.
+// import TeamGrid from '../../components/TeamGrid'
+// import TestimonialList from '../../components/TestimonialList'
+// import FaqList from '../../components/FaqList'
+// import PartnerLogos from '../../components/PartnerLogos'
+// import EventList from '../../components/EventList'
 import Gallery from '../../components/Gallery'
 import { brands } from '../../config/brands'
 import * as centro from '../../content/centro'
 import './Home.css'
+import BrandCardCta from '../../components/BrandCardCta'
 
 /**
  * Mirrors the two groups in the "Programas" dropdown (see programNav in
@@ -44,17 +48,10 @@ function CentroHome() {
         brand={brand}
         title={brand.name}
         tagline={brand.tagline}
+        image={centro.heroImage}
       >
         <div className="page-hero-actions">
-          <a
-            className="page-hero-cta page-hero-cta--primary"
-            href={centro.scheduleUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Agenda una cita
-          </a>
-          <a className="page-hero-cta page-hero-cta--secondary" href="#programas">
+          <a className="page-hero-cta page-hero-cta--primary" href="#programas">
             Conoce nuestros programas
           </a>
         </div>
@@ -104,9 +101,7 @@ function CentroHome() {
               description={program.blurb}
               brand={program}
             >
-              <Link to={program.path} className="card-cta">
-                {program.live ? 'Visitar programa' : 'Ver vista previa'}
-              </Link>
+              <BrandCardCta brand={program} />
             </FeatureCard>
           ))}
         </div>
@@ -131,9 +126,7 @@ function CentroHome() {
               description={initiative.blurb}
               brand={initiative}
             >
-              <Link to={initiative.path} className="card-cta">
-                {initiative.live ? 'Visitar programa' : 'Ver vista previa'}
-              </Link>
+              <BrandCardCta brand={initiative} />
             </FeatureCard>
           ))}
         </div>
@@ -160,7 +153,7 @@ function CentroHome() {
       )} */}
 
       <Section heading="Galería" muted>
-        <Gallery placeholderCount={centro.galleryPlaceholderCount} />
+        <Gallery images={centro.galleryImages} />
       </Section>
 {/* 
       <Section heading="Próximos eventos">

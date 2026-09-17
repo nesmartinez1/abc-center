@@ -21,7 +21,7 @@ export type BrandId =
 /** A page within a brand's own contextual sub-nav (only MQA has several today). */
 export type BrandPage = {
   label: string
-  /** Route path relative to the app root (absolute), e.g. '/fundacion/mas-que-atletas/deportes'. */
+  /** Route path relative to the app root (absolute), e.g. '/fundacion/mas-que-atletas/nosotros'. */
   to: string
   /** Pass `end` for the brand's index/home link so it isn't active on child routes. */
   end?: boolean
@@ -128,7 +128,9 @@ export const brands: Record<BrandId, Brand> = {
     pages: [
       { label: 'Inicio', to: '/mental-care', end: true },
       { label: 'Servicios', to: '/mental-care/servicios' },
-      { label: 'Equipo', to: '/mental-care/equipo' },
+      // Hidden until ABC supplies team profiles — see `team` in
+      // content/mental-care.ts. The page itself still exists.
+      // { label: 'Equipo', to: '/mental-care/equipo' },
       { label: 'Recursos', to: '/mental-care/recursos' },
       { label: 'Contacto', to: '/mental-care/contacto' },
     ],
@@ -151,8 +153,13 @@ export const brands: Record<BrandId, Brand> = {
     pages: [
       { label: 'Inicio', to: '/fundacion', end: true },
       { label: 'Iniciativas', to: '/fundacion/iniciativas' },
-      { label: 'Impacto', to: '/fundacion/impacto' },
-      { label: 'Donar', to: '/fundacion/donar' },
+      // Hidden until ABC has numbers to publish and a payment processor:
+      // Impacto has no real figures, and Donate.tsx's submit is hard-disabled
+      // (donationsEnabled is false in content/foundation.ts). Both pages still
+      // exist; uncomment these with the routes in App.tsx, and repoint the
+      // "Colabora con nosotros" / "Escríbenos" CTAs back at /fundacion/donar.
+      // { label: 'Impacto', to: '/fundacion/impacto' },
+      // { label: 'Donar', to: '/fundacion/donar' },
       { label: 'Contacto', to: '/fundacion/contacto' },
     ],
   },
@@ -172,11 +179,16 @@ export const brands: Record<BrandId, Brand> = {
     live: true,
     pages: [
       { label: 'Inicio', to: '/fundacion/mas-que-atletas', end: true },
-      { label: 'Deportes', to: '/fundacion/mas-que-atletas/deportes' },
-      {
-        label: 'Noticias y Actualizaciones',
-        to: '/fundacion/mas-que-atletas/noticias',
-      },
+      { label: 'Nosotros', to: '/fundacion/mas-que-atletas/nosotros' },
+      { label: 'Registro', to: '/fundacion/mas-que-atletas/registro' },
+      // Hidden until ABC sends real photos and news copy — both pages are
+      // placeholder galleries plus one announcement. Sports.tsx / News.tsx
+      // still exist; uncomment these with the routes in App.tsx.
+      // { label: 'Deportes', to: '/fundacion/mas-que-atletas/deportes' },
+      // {
+      //   label: 'Noticias y Actualizaciones',
+      //   to: '/fundacion/mas-que-atletas/noticias',
+      // },
     ],
   },
   'ocean-care': {
@@ -198,7 +210,10 @@ export const brands: Record<BrandId, Brand> = {
       { label: 'Inicio', to: '/fundacion/ocean-care', end: true },
       { label: 'Actividades', to: '/fundacion/ocean-care/actividades' },
       { label: 'Calendario', to: '/fundacion/ocean-care/calendario' },
-      { label: 'Únete', to: '/fundacion/ocean-care/unete' },
+      // Hidden while the volunteer funnel is paused. Join.tsx still exists;
+      // uncomment this with the route in App.tsx and the CTA sections on
+      // Home.tsx, Activities.tsx and Calendar.tsx.
+      // { label: 'Únete', to: '/fundacion/ocean-care/unete' },
     ],
   },
   'abc-nutrition': {
@@ -210,7 +225,14 @@ export const brands: Record<BrandId, Brand> = {
     blurb:
       'Próxima iniciativa de ABC Foundation enfocada en la nutrición y los hábitos alimentarios saludables de niños, jóvenes y familias. Los detalles del programa estarán disponibles próximamente.',
     accentName: 'Rosa',
-    live: true,
+    logo: {
+      full: '/logos/abc-nutrition-full.webp',
+      mark: '/logos/abc-nutrition-mark.webp',
+    },
+    // The page exists (brands/abc-nutrition/Home.tsx) but the program does
+    // not yet. `live: false` renders it as an unlinked "Próximamente" row
+    // everywhere; flip it back together with the route in App.tsx.
+    live: false,
   },
 }
 
