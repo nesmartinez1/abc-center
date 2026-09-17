@@ -1,5 +1,7 @@
 import PlaceholderImage from '../../components/PlaceholderImage'
 import FeatureCard from '../../components/FeatureCard'
+import BrandLogo from '../../components/BrandLogo'
+import { brands } from '../../config/brands'
 import './Home.css'
 
 function Home() {
@@ -9,6 +11,12 @@ function Home() {
         <PlaceholderImage label="Foto próximamente" fill />
         <div className="home-hero-scrim" />
         <div className="home-hero-content">
+          {/* This page has its own hero rather than the shared PageHero, so the
+              logo chip is repeated here. Same treatment: the lockup's blue and
+              green wordmark is unreadable against the dark scrim without it. */}
+          <span className="brand-logo-chip">
+            <BrandLogo brand={brands['mas-que-atletas']} decorative />
+          </span>
           <h1>
             Formando Atletas.
             <br />

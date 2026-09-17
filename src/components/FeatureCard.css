@@ -20,6 +20,37 @@
     rgba(0, 0, 0, 0.08) 0 8px 12px -6px;
 }
 
+/* Logos vary from 0.88 to 1.50 in aspect ratio, so a fixed-height row keeps
+   the titles beneath them aligned across a grid of cards.
+
+   The white backdrop is not decoration: every logo has dark text baked into it
+   (Brilliant Brains' navy wordmark, Mental Care's dark green, Ocean Care's
+   navy), so on a dark card they range from hard to read to invisible. Because
+   light-mode `--bg` is pure white the chip disappears there, and in dark mode
+   it becomes the panel that makes the logo legible. */
+.feature-card-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  height: 76px;
+  box-sizing: content-box;
+  padding: 8px 14px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.feature-card-logo .brand-logo {
+  max-height: 100%;
+}
+
+/* Placeholder stand-in for a brand with no logo yet, sized to match. */
+.feature-card-logo .placeholder-image {
+  height: 100%;
+  width: auto;
+}
+
 .feature-card p {
   flex: 1;
 }

@@ -65,7 +65,13 @@ Everything flows from one config: **`src/config/brands.tsx`**.
 
 - `brands` (record keyed by `BrandId`) — each program's name, `path`, tagline,
   blurb, `live` flag, and optional `pages` (contextual sub-nav).
-- `programNav` — the dropdown-menu hierarchy (Foundation nests MQA + Ocean Care).
+- `programNav` — the dropdown menu as **two labelled groups**, not a flat tree:
+  *Servicios del Centro* (Brilliant Brains, Mental Care) and *ABC Foundation*
+  (its `owner`), which holds MQA, Ocean Care and Nutrition. See
+  ["The Foundation split"](#the-foundation-split) — the grouping is load-bearing,
+  not decoration.
+- `parentBrandOf(id)` — the brand owning `id`'s group, derived from `programNav`
+  so the menu and the sub-nav breadcrumb can't disagree.
 - Add/adjust a program by editing this file **and** adding a matching theme block
   in `src/brands.css`.
 
@@ -150,6 +156,48 @@ import for exactly this reason.
 `brands/mental-care/Layout.tsx`. ABC asked for it explicitly; don't make it
 conditional.
 
+### Logos
+
+ABC's six logos live in **`assets-src/logos/`** (NOT `public/` — everything there
+is copied verbatim into `dist/`, and the originals are 614KB of mostly blank
+padding). `scripts/build-logos.py` turns them into the assets the site loads:
+
+```bash
+python3 scripts/build-logos.py    # writes public/logos/, commit the output
+python3 scripts/check-logos.py    # asserts the output is correct
+```
+
+**Drop new/updated logo files in `assets-src/logos/` and re-run the script.**
+
+Two things in that script are load-bearing:
+
+1. **Background removal is an edge flood-fill, not a global white→transparent
+   pass.** Some artwork *is* white — the A/B/C letters inside ABC Centro's
+   blocks, and the text inside ABC Foundation's red pill. A global colour
+   replace punches holes straight through them. `check-logos.py` samples those
+   exact regions and fails if they stop being opaque; it exists because the
+   damage is invisible in a thumbnail.
+2. **The mark crop boxes are hand-measured and can't be derived.** The lockups
+   aren't structured consistently: Centro's wordmark *arcs around* its symbol,
+   Brilliant Brains' character stands *on* the letters, and Ocean Care is a
+   single circular badge that can't be split at all.
+
+Each brand gets two variants, wired through `Brand.logo` and rendered by
+`components/BrandLogo.tsx` (which falls back to `PlaceholderImage`, so call
+sites never check — ABC Nutrition has no logo yet):
+
+- **`full`** — the whole lockup. Use at 100px+ only.
+- **`mark`** — the cropped symbol. The *only* version legible below ~80px;
+  it's what the navbar and favicon use.
+
+**Every logo needs a light backdrop on dark surfaces.** They all have dark text
+baked in — Brilliant Brains' navy wordmark, Mental Care's dark green, Ocean
+Care's navy — so on a dark card or hero scrim they go from hard to read to
+completely invisible. Hence `.brand-logo-chip` (hero) and the white backdrop on
+`.feature-card-logo`. The card chip is pure white, which disappears against
+light-mode `--bg` (also white) and becomes a visible panel in dark mode. Don't
+"simplify" either away.
+
 ### Tailwind is scoped to Brilliant Brains
 
 `src/brilliant-brains.css` is a load-bearing seam between two styling systems.
@@ -182,6 +230,35 @@ element `src/brands/brilliant-brains/Layout.tsx`. That wrapper also sets
 `color-scheme: light`, because BB is designed light-only and does not follow the
 site's dark mode.
 
+### The Foundation split
+
+ABC Foundation is **not** a third service alongside Brilliant Brains and Mental
+Care — it's ABC's community arm and runs its own initiatives. A flat menu made
+all five read as peers, so the hierarchy is now expressed in three places, all
+driven by `programNav`:
+
+1. **The dropdown** — two `role="group"` blocks with labels. Foundation's group
+   is `--owned`: a tinted panel with a left accent bar whose header row *is* the
+   link to `/fundacion`, with its initiatives indented inside.
+2. **The sub-nav** — programs with an owner get an `ABC Foundation ›` breadcrumb
+   on every page of their section. Foundation itself gets none; it's the owner,
+   not the owned.
+3. **The homepage** — "Servicios del Centro" and a separate "ABC Foundation" band
+   listing its initiatives, mirroring the menu.
+
+**Two things to not undo:**
+
+- **The Foundation group must never use `--accent`.** The dropdown and sub-nav
+  live inside `.app-shell[data-brand]`, so `--accent` is whatever program the
+  visitor is currently on — tinting with it turns Foundation teal on Mental Care
+  pages and green on MQA pages, defeating the point. Use the brand-independent
+  `--foundation-*` tokens at the top of `brands.css` (there's a test asserting
+  the tint is identical from three different programs).
+- **The descriptor deliberately avoids "sin fines de lucro".** ABC has never
+  confirmed nonprofit registration (see `../abc-content-outstanding.md`), so
+  that would be an unverified legal claim. It currently reads "Iniciativas
+  comunitarias de ABC". Change it in `programNav` once they confirm status.
+
 ### Navigation
 
 - **`Navbar.tsx`** — brand + `Inicio` + a **"Programas" dropdown** (click to open,
@@ -189,9 +266,9 @@ site's dark mode.
   children nested. Non-`live` programs show a "Próximamente" badge. On mobile
   (<1024px) the hamburger panel shows the same tree as an always-expanded
   accordion. Search input is a non-functional placeholder (no CMS).
-- **`SubNav.tsx`** — slim secondary nav for the active program's own `pages`.
-  Only renders for brands that define `pages` (today: MQA and Brilliant Brains).
-  Single-page prototypes render nothing.
+- **`SubNav.tsx`** — slim secondary nav for the active program's own `pages`,
+  prefixed with an `ABC Foundation ›` breadcrumb when the brand has an owner.
+  Only renders for brands that define `pages`.
 - **`SocialIcons.tsx`** — reads `activeBrand.social` (passed down by `Footer.tsx`)
   and falls back to `href="#"` for any platform a program hasn't supplied. Only
   Brilliant Brains has real accounts so far.
@@ -228,12 +305,12 @@ src/
     DonationTiers.tsx         donation UI; submit DISABLED (no processor)
     layout/
       Layout.tsx              sets data-brand; Navbar + SubNav + <Outlet/> + Footer
-      Navbar.tsx              hierarchical "Programas" dropdown + mobile accordion
-      SubNav.tsx              per-program sub-nav + "Vista previa" badge
+      Navbar.tsx              grouped "Programas" dropdown + mobile accordion
+      SubNav.tsx              per-program sub-nav + Foundation breadcrumb
       Footer.tsx              brand-aware footer
       useActiveBrand.ts       pathname -> active brand (longest-prefix match)
   brands/
-    centro/Home.tsx           umbrella home — misión/visión/valores/historia
+    centro/Home.tsx           umbrella home; programs split Servicios/Foundation
     brilliant-brains/          LIVE — ported from ../abc_brilliant_brains
       Layout.tsx              route element supplying the .bb-scope wrapper
       Home.tsx                hero + services carousel
@@ -255,7 +332,10 @@ src/
 
 ## Placeholders to replace when real assets arrive
 
-- **Logo**: `.navbar-logo` placeholder in `Navbar.tsx`.
+- **Logo**: done — ABC Centro's mark is in the navbar and the favicon. Missing:
+  ABC Nutrition has no logo, and all six are JPEG exports of vector art
+  (raster, so they soften when scaled up). Vector originals are on the
+  outstanding list.
 - **Hero/section photos**: `PlaceholderImage` boxes throughout (labeled "Foto
   próximamente"); MQA hero uses `<PlaceholderImage fill />`.
 - **Brand accent colors**: `src/brands.css` (currently sensible placeholders).

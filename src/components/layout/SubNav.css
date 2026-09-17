@@ -18,6 +18,37 @@
   box-sizing: border-box;
 }
 
+/* Breadcrumb to the owning brand (ABC Foundation). Muted on purpose — it should
+   support the program name, not compete with it. Uses Foundation's own colour
+   rather than --on-ink-accent, which tracks the active program. */
+.subnav-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: -16px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.subnav-crumb a {
+  color: var(--foundation-on-ink);
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.subnav-crumb a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.subnav-crumb-sep {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
 .subnav-brand {
   font-size: 13px;
   font-weight: 700;

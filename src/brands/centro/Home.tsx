@@ -13,10 +13,18 @@ import { brands } from '../../config/brands'
 import * as centro from '../../content/centro'
 import './Home.css'
 
-const programs = [
-  brands['brilliant-brains'],
-  brands['mental-care'],
-  brands.foundation,
+/**
+ * Mirrors the two groups in the "Programas" dropdown (see programNav in
+ * config/brands.tsx). Presenting Foundation as a third peer card implied it was
+ * another service like the other two, rather than ABC's community arm running
+ * its own initiatives.
+ */
+const centerServices = [brands['brilliant-brains'], brands['mental-care']]
+
+const foundationInitiatives = [
+  brands['mas-que-atletas'],
+  brands['ocean-care'],
+  brands['abc-nutrition'],
 ]
 
 /**
@@ -33,9 +41,9 @@ function CentroHome() {
   return (
     <div className="centro-home">
       <PageHero
+        brand={brand}
         title={brand.name}
         tagline={brand.tagline}
-        badge={!brand.live ? 'Vista previa · Próximamente' : undefined}
       >
         <div className="page-hero-actions">
           <a
@@ -82,16 +90,49 @@ function CentroHome() {
         </div>
       </Section>
 
-      <Section heading="Nuestros programas" id="programas" muted>
+      <Section
+        heading="Servicios del Centro"
+        id="programas"
+        intro="Programas que atienden directamente a niños, jóvenes, adultos y familias."
+        muted
+      >
         <div className="section-grid">
-          {programs.map((program) => (
+          {centerServices.map((program) => (
             <FeatureCard
               key={program.id}
               title={program.name}
               description={program.blurb}
+              brand={program}
             >
               <Link to={program.path} className="card-cta">
                 {program.live ? 'Visitar programa' : 'Ver vista previa'}
+              </Link>
+            </FeatureCard>
+          ))}
+        </div>
+      </Section>
+
+      {/* Foundation gets its own band so it reads as a separate arm of ABC
+          rather than a continuation of the services grid above. */}
+      <Section heading={brands.foundation.name}>
+        <div className="centro-foundation">
+          <p className="centro-body">{brands.foundation.blurb}</p>
+          <Link to={brands.foundation.path} className="card-cta">
+            Conoce la fundación
+          </Link>
+        </div>
+
+        <h3 className="centro-subheading">Sus iniciativas</h3>
+        <div className="section-grid">
+          {foundationInitiatives.map((initiative) => (
+            <FeatureCard
+              key={initiative.id}
+              title={initiative.name}
+              description={initiative.blurb}
+              brand={initiative}
+            >
+              <Link to={initiative.path} className="card-cta">
+                {initiative.live ? 'Visitar programa' : 'Ver vista previa'}
               </Link>
             </FeatureCard>
           ))}
@@ -108,20 +149,20 @@ function CentroHome() {
         </Section>
       )}
 
-      <Section heading="Nuestro equipo">
+      {/* <Section heading="Nuestro equipo">
         <TeamGrid members={centro.team} placeholderCount={3} />
-      </Section>
+      </Section> */}
 
-      {centro.testimonials.length > 0 && (
+      {/* {centro.testimonials.length > 0 && (
         <Section heading="Lo que dicen las familias" muted>
           <TestimonialList testimonials={centro.testimonials} />
         </Section>
-      )}
+      )} */}
 
       <Section heading="Galería" muted>
         <Gallery placeholderCount={centro.galleryPlaceholderCount} />
       </Section>
-
+{/* 
       <Section heading="Próximos eventos">
         <EventList events={centro.events} />
       </Section>
@@ -136,7 +177,7 @@ function CentroHome() {
         <Section heading="Nuestros aliados">
           <PartnerLogos partners={centro.partners} />
         </Section>
-      )}
+      )} */}
     </div>
   )
 }

@@ -29,7 +29,6 @@ function BrandLanding({ brand, childBrands }: BrandLandingProps) {
       <PageHero
         title={brand.name}
         tagline={brand.tagline}
-        badge={!brand.live ? 'Vista previa · Próximamente' : undefined}
       />
 
       <section className="brand-about">

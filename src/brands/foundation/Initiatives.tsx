@@ -29,6 +29,7 @@ function FoundationInitiatives() {
               key={initiative.id}
               title={initiative.name}
               description={initiative.blurb}
+              brand={initiative}
             >
               <Link to={initiative.path} className="card-cta">
                 {initiative.live ? 'Visitar programa' : 'Ver vista previa'}

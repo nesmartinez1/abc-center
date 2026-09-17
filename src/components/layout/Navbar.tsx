@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import PlaceholderImage from '../PlaceholderImage'
+import BrandLogo from '../BrandLogo'
 import {
   brands,
   programNav,
   type Brand,
-  type NavNode,
+  type BrandId,
 } from '../../config/brands'
 import './Navbar.css'
 
@@ -46,10 +46,11 @@ function Navbar({ activeBrand }: NavbarProps) {
 
   const programsActive = activeBrand.id !== 'centro'
 
-  const renderLeaf = (node: NavNode, nested: boolean) => {
-    const brand = brands[node.id]
+  const renderLeaf = (id: BrandId, nested: boolean) => {
+    const brand = brands[id]
     return (
       <NavLink
+        key={id}
         to={brand.path}
         end
         className={({ isActive }) =>
@@ -74,8 +75,15 @@ function Navbar({ activeBrand }: NavbarProps) {
   return (
     <header className="navbar">
       <NavLink to="/" className="navbar-brand" onClick={closeAll}>
-        <PlaceholderImage label="Logo" ratio="1/1" className="navbar-logo" />
-        <span className="navbar-title">ABC Centro Familiar Integral</span>
+        {/* The mark, not the full lockup — the lockup's wordmark is illegible
+            at 42px and would duplicate the title text beside it. */}
+        <BrandLogo
+          brand={brands.centro}
+          variant="mark"
+          className="navbar-logo"
+          decorative
+        />
+        <span className="navbar-title">{brands.centro.name}</span>
       </NavLink>
 
       <button
@@ -131,18 +139,58 @@ function Navbar({ activeBrand }: NavbarProps) {
             </button>
 
             <div id="programs-menu" className="navbar-dropdown-panel">
-              {programNav.map((node) => (
-                <div key={node.id} className="navbar-dropdown-group">
-                  {renderLeaf(node, false)}
-                  {node.children && (
-                    <div className="navbar-dropdown-children">
-                      {node.children.map((child) => (
-                        <div key={child.id}>{renderLeaf(child, true)}</div>
-                      ))}
+              {programNav.map((group) => {
+                const labelId = `programs-group-${group.label
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')}`
+                const owner = group.owner ? brands[group.owner] : undefined
+
+                return (
+                  <div
+                    key={group.label}
+                    role="group"
+                    aria-labelledby={labelId}
+                    className={`navbar-dropdown-group ${
+                      owner ? 'navbar-dropdown-group--owned' : ''
+                    }`}
+                  >
+                    {owner ? (
+                      // The group header IS the link to the owner's page, rather
+                      // than a separate "Ver →" control competing with it.
+                      <NavLink
+                        to={owner.path}
+                        end
+                        id={labelId}
+                        className={({ isActive }) =>
+                          `navbar-group-owner ${isActive ? 'active' : ''}`
+                        }
+                        onClick={closeAll}
+                      >
+                        <span className="navbar-group-owner-name">
+                          {group.label}
+                        </span>
+                        {group.description && (
+                          <span className="navbar-group-owner-desc">
+                            {group.description}
+                          </span>
+                        )}
+                      </NavLink>
+                    ) : (
+                      <p id={labelId} className="navbar-group-label">
+                        {group.label}
+                      </p>
+                    )}
+
+                    <div
+                      className={
+                        owner ? 'navbar-dropdown-children' : undefined
+                      }
+                    >
+                      {group.items.map((id) => renderLeaf(id, Boolean(owner)))}
                     </div>
-                  )}
-                </div>
-              ))}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </nav>

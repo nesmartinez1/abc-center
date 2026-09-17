@@ -1,0 +1,47 @@
+.brand-logo {
+  display: block;
+  object-fit: contain;
+}
+
+/* Full lockups are wider than tall and vary in ratio (0.88–1.50), so callers
+   set a height and the width follows. */
+.brand-logo--full {
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+}
+
+.brand-logo--mark {
+  aspect-ratio: 1 / 1;
+  height: 100%;
+  width: auto;
+}
+
+/* White chip behind a logo placed on a dark surface (hero scrim). The logos
+   are a mix of pale sage, navy and bright primaries — several of them vanish
+   against a dark background, so the chip is what makes one treatment work for
+   all six. */
+.brand-logo-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.45);
+}
+
+.brand-logo-chip .brand-logo--full {
+  height: 84px;
+}
+
+@media (max-width: 1024px) {
+  .brand-logo-chip {
+    padding: 10px 16px;
+    border-radius: 14px;
+  }
+
+  .brand-logo-chip .brand-logo--full {
+    height: 62px;
+  }
+}

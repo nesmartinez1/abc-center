@@ -10,6 +10,34 @@
  * Ordered to match the org chart. Keep ids in sync with config/brands.tsx.
  */
 
+/* ---- ABC Foundation identity, INDEPENDENT of the active brand -----------
+ *
+ * The "Programas" dropdown and the sub-nav breadcrumb both live inside
+ * .app-shell[data-brand], so `--accent` there is whatever program the visitor
+ * is currently looking at. Tinting Foundation's menu group with `--accent`
+ * would render it teal on Mental Care pages and green on Más Que Atletas ones,
+ * which defeats the whole point of marking it out as its own entity.
+ *
+ * These sit outside every [data-brand] block on purpose: Foundation always
+ * looks like Foundation, wherever you are on the site. Do NOT swap them for
+ * `--accent`. Keep the values in sync with [data-brand='foundation'] below.
+ */
+
+:root {
+  --foundation-accent: #7c3aed;
+  --foundation-bg: rgba(124, 58, 237, 0.08);
+  --foundation-border: rgba(124, 58, 237, 0.35);
+  --foundation-on-ink: #a78bfa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foundation-accent: #a78bfa;
+    --foundation-bg: rgba(167, 139, 250, 0.12);
+    --foundation-border: rgba(167, 139, 250, 0.32);
+  }
+}
+
 /* ---- Light-mode accents ------------------------------------------------- */
 
 /* ABC Centro Familiar Integral — Índigo */

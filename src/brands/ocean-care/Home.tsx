@@ -12,9 +12,9 @@ function OceanCareHome() {
   return (
     <div>
       <PageHero
+        brand={brand}
         title={brand.name}
         tagline={oc.intro}
-        badge={!brand.live ? 'Vista previa · Próximamente' : undefined}
       >
         <div className="page-hero-actions">
           <Link
